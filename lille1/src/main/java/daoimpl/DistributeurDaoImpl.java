@@ -2,16 +2,15 @@ package daoimpl;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import dao.DistributeurDAO;
 import model.Distributeur;
 
-public class DistributeurDaoImpl extends DaoImpl <Integer, Distributeur> implements DistributeurDAO {
-	public DistributeurDaoImpl () {
+@SuppressWarnings("serial")
+public class DistributeurDaoImpl extends DaoImpl<Integer, Distributeur> implements DistributeurDAO {
+	public DistributeurDaoImpl() {
 		super();
 	}
+
 	@Override
 	public Distributeur findById(Integer id) {
 		return super.rechercher(id);

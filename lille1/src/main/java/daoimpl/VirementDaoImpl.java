@@ -2,24 +2,22 @@ package daoimpl;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
 import dao.VirementDAO;
 import model.Virement;
 
-public class VirementDaoImpl extends DaoImpl <Integer, Virement >implements VirementDAO {
+@SuppressWarnings("serial")
+public class VirementDaoImpl extends DaoImpl<Integer, Virement> implements VirementDAO {
 	public VirementDaoImpl() {
 		super();
 	}
+
 	@Override
 	public Virement findById(Integer i) {
 		return super.rechercher(i);
 	}
 
 	@Override
-	public List <Virement> findAll() {
+	public List<Virement> findAll() {
 		return super.lister();
 	}
 

@@ -2,17 +2,15 @@ package daoimpl;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import dao.BanqueDAO;
 import model.Banque;
 
-public class BanqueDaoImpl extends DaoImpl <Integer, Banque> implements BanqueDAO {
+@SuppressWarnings("serial")
+public class BanqueDaoImpl extends DaoImpl<Integer, Banque> implements BanqueDAO {
 	public BanqueDaoImpl() {
 		super();
 	}
-	
+
 	@Override
 	public Banque findById(Integer i) {
 		return super.rechercher(i);
