@@ -13,13 +13,13 @@ public class ActionDistributeurImpl implements ActionDistributeur {
 	}
 
 	@Override
-	public Distributeur retrait(Client client, float montant) {
+	public Distributeur retrait(Client client, double montant) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Distributeur virement(Client client, float montant, String ibanTo) {
+	public Distributeur virement(Client client, double montant, String ibanTo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

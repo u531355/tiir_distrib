@@ -10,6 +10,7 @@ import model.Banque;
 
 public class BanqueDaoImpl implements BanqueDAO {
 	private EntityManager em;
+
 	@Override
 	public Banque findById(Integer i) {
 		// TODO Auto-generated method stub
@@ -33,9 +34,9 @@ public class BanqueDaoImpl implements BanqueDAO {
 	@Override
 	public void updateBanque(Banque b) {
 		// TODO Auto-generated method stub
-		Query q = em.createQuery("Update Banque b set b.iban_start = :iban_start, b.url = :url "
+		Query q = em.createQuery("Update Banque b set b.card_number_start = :card_number_start, b.url = :url "
 				+ "b.id_banque = :id_banque");
-		q.setParameter("iban_start", b.getIbanStart());
+		q.setParameter("card_number_start", b.getCardNumberStart());
 		q.setParameter("url", b.getUrl());
 		q.setParameter("id_banque", b.getIdBanque());
 		q.executeUpdate();

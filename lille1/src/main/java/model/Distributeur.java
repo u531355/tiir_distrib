@@ -1,41 +1,45 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  * The persistent class for the distributeur database table.
  * 
  */
+@SuppressWarnings("serial")
 @Entity
-@NamedQuery(name="Distributeur.findAll", query="SELECT d FROM Distributeur d")
+@NamedQuery(name = "Distributeur.findAll", query = "SELECT d FROM Distributeur d")
 public class Distributeur implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
-	@Column(name="id_distributeur")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_distributeur")
 	private Integer idDistributeur;
 
-	private double montant;
+	private double solde;
 
-	public Distributeur() {
+	public Distributeur(double solde) {
+		this.solde = solde;
+	}
+
+	protected Distributeur() {
 	}
 
 	public Integer getIdDistributeur() {
 		return this.idDistributeur;
 	}
 
-	public void setIdDistributeur(Integer idDistributeur) {
-		this.idDistributeur = idDistributeur;
+	public double getSolde() {
+		return this.solde;
 	}
 
-	public double getMontant() {
-		return this.montant;
+	public void retirer(double montant) {
+		// TODO
 	}
-
-	public void setMontant(double montant) {
-		this.montant = montant;
-	}
-
 }

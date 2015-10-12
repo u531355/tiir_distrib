@@ -10,6 +10,7 @@ import model.Distributeur;
 
 public class DistributeurDaoImpl implements DistributeurDAO {
 	private EntityManager em;
+
 	@Override
 	public Distributeur findById(Integer id) {
 		// TODO Auto-generated method stub
@@ -22,7 +23,7 @@ public class DistributeurDaoImpl implements DistributeurDAO {
 	public List<Distributeur> findAll() {
 		// TODO Auto-generated method stub
 		Query q = em.createQuery("select d from Distributeur d");
-		return (List <Distributeur>)q.getResultList();
+		return (List<Distributeur>) q.getResultList();
 	}
 
 	@Override
@@ -40,9 +41,10 @@ public class DistributeurDaoImpl implements DistributeurDAO {
 	@Override
 	public void updateDistibuteur(Distributeur distrib) {
 		// TODO Auto-generated method stub
-		Query q = em.createQuery("update Distributeur d set d.montant = :montant where id_distributeur = :id_distributeur");
+		Query q = em
+				.createQuery("update Distributeur d set d.solde = :montant where id_distributeur = :id_distributeur");
 		q.setParameter(":id_distributeur", distrib.getIdDistributeur());
-		q.setParameter("montant", distrib.getMontant());
+		q.setParameter("solde", distrib.getSolde());
 		q.executeUpdate();
 	}
 
