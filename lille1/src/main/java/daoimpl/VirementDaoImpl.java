@@ -15,7 +15,7 @@ public class VirementDaoImpl implements VirementDAO {
 	@Override
 	public Virement findById(Integer i) {
 		// TODO Auto-generated method stub
-		Query q = em.createQuery("Select v from Virement where id_banque = :id_banque ");
+		Query q = em.createQuery("Select v from Virement v where id_banque = :id_banque ");
 		q.setParameter("id_banque", i);
 		return (Virement) q.getSingleResult();
 		
@@ -32,6 +32,7 @@ public class VirementDaoImpl implements VirementDAO {
 	public void updateVirement(Virement v) {
 		// TODO Auto-generated method stub
 		Query q = em.createQuery("Update Virement set ");
+		q.executeUpdate();
 	}
 
 	@Override
