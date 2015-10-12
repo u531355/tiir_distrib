@@ -1,12 +1,12 @@
 package usecase;
 
-import model.Banque;
+import model.Client;
 import model.Distributeur;
 
 public interface ActionDistributeur {
-	Distributeur afficherSolde(Banque banque, String cardNumber);
+	Distributeur afficherSolde(Client client);
 
-	Distributeur retrait(Banque banque, String cardNumber, float montant);
+	Distributeur retrait(Client client, float montant);
 
-	Distributeur virement(Banque banque, String cardNumber, float montant, String ibanTo);
+	Distributeur virement(Client client, float montant, String ibanTo);
 }
