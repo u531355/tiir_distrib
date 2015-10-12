@@ -10,6 +10,14 @@ public class Client {
 		this.token = token;
 	}
 
+	public Banque getMyBank() {
+		return myBank;
+	}
+
+	public String getIban() {
+		return iban;
+	}
+
 	public String getToken() {
 		return token;
 	}
