@@ -8,42 +8,33 @@ import javax.persistence.Query;
 import dao.DistributeurDAO;
 import model.Distributeur;
 
-public class DistributeurDaoImpl implements DistributeurDAO {
-	private EntityManager em;
+public class DistributeurDaoImpl extends DaoImpl <Integer, Distributeur> implements DistributeurDAO {
+	public DistributeurDaoImpl () {
+		super();
+	}
 	@Override
 	public Distributeur findById(Integer id) {
-		// TODO Auto-generated method stub
-		Query q = em.createQuery("select d from Distributeur d where id_distributeur = :id_distributeur");
-		q.setParameter("id_distributeur", id);
-		return (Distributeur) q.getSingleResult();
+		return super.rechercher(id);
 	}
 
 	@Override
 	public List<Distributeur> findAll() {
-		// TODO Auto-generated method stub
-		Query q = em.createQuery("select d from Distributeur d");
-		return (List <Distributeur>)q.getResultList();
+		return super.lister();
 	}
 
 	@Override
 	public void removeDistributeur(Distributeur distrib) {
-		// TODO Auto-generated method stub
-		em.remove(distrib);
+		super.supprimer(distrib.getIdDistributeur());
 	}
 
 	@Override
 	public void createDistributeur(Distributeur distrib) {
-		// TODO Auto-generated method stub
-		em.persist(distrib);
+		super.enregistrer(distrib);
 	}
 
 	@Override
 	public void updateDistibuteur(Distributeur distrib) {
-		// TODO Auto-generated method stub
-		Query q = em.createQuery("update Distributeur d set d.montant = :montant where id_distributeur = :id_distributeur");
-		q.setParameter(":id_distributeur", distrib.getIdDistributeur());
-		q.setParameter("montant", distrib.getMontant());
-		q.executeUpdate();
+		super.mettreAJour(distrib);
 	}
 
 }
