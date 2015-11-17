@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
@@ -18,7 +19,7 @@ import dao.Dao;
 public abstract class DaoImpl<K, E> implements Dao<K, E> {
         private Class<E> entityClass;
 
-        @PersistenceContext(unitName="black")
+        @PersistenceContext(unitName="DAO-DB")
         private EntityManager entityManager;
         
         @SuppressWarnings("unchecked")
@@ -32,6 +33,7 @@ public abstract class DaoImpl<K, E> implements Dao<K, E> {
         }
 
         public E enregistrer(E entité) {
+        		System.out.println(entityManager);
                 entityManager.persist(entité);
                 return entité;
         }

@@ -1,51 +1,57 @@
 package model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 
 /**
  * The persistent class for the banque database table.
  * 
  */
-@SuppressWarnings("serial")
 @Entity
-@NamedQuery(name = "Banque.findAll", query = "SELECT b FROM Banque b")
+@NamedQuery(name="Banque.findAll", query="SELECT b FROM Banque b")
 public class Banque implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_banque")
+	@Column(name="id_banque")
 	private Integer idBanque;
 
-	@Column(name = "card_number_start")
-	private Integer cardNumberStart;
+	@Column(name="iban_start")
+	private Integer ibanStart;
 
 	private String url;
 
-	public Banque(Integer cardNumberStart, String url) {
-		this.cardNumberStart = cardNumberStart;
-		this.url = url;
+	public Banque() {
 	}
-
-	protected Banque() {
-
+	public Banque(int ibanStart, String url) {
+		this.ibanStart = ibanStart;
+		this.url = url;
 	}
 
 	public Integer getIdBanque() {
 		return this.idBanque;
 	}
 
-	public Integer getCardNumberStart() {
-		return cardNumberStart;
+	public void setIdBanque(Integer idBanque) {
+		this.idBanque = idBanque;
+	}
+
+	public Integer getIbanStart() {
+		return this.ibanStart;
+	}
+
+	public void setIbanStart(Integer ibanStart) {
+		this.ibanStart = ibanStart;
 	}
 
 	public String getUrl() {
 		return this.url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }
