@@ -24,7 +24,7 @@ public class Retrait implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_retrait")
 	private Integer idRetrait;
-
+	
 	@Temporal(TemporalType.DATE)
 	private Date date;
 

@@ -20,6 +20,10 @@ public class BanqueDaoImpl extends DaoImpl<Integer, Banque> implements BanqueDAO
 	public List<Banque> findAll() {
 		return super.lister();
 	}
+	
+	public Banque findByIban(Integer ibanStart) {
+		return super.recherche("Select * from Banque where iban_start=:iban_start",ibanStart);
+	}
 
 	@Override
 	public void removeBanque(Banque b) {
