@@ -1,26 +1,31 @@
 package model;
 
-
-import daoimpl.BanqueDaoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class Client {
 	private String numeroCarte;
 	private String token;
 	private String hash;
 	private String idAccount;
+	private boolean connected;
+
 	public Client() {
-		
+
 	}
+
+	@Autowired
 	public Client(String numeroCarte, String hash) {
 		this.numeroCarte = numeroCarte;
 		this.hash = hash;
 		this.token = null;
 		this.idAccount = null;
+		this.connected = false;
 	}
 
 	public String getNumeroCarte() {
 		return numeroCarte;
 	}
+
 	public void setNumeroCarte(String numeroCarte) {
 		this.numeroCarte = numeroCarte;
 	}
@@ -28,21 +33,32 @@ public class Client {
 	public String getToken() {
 		return token;
 	}
+
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
+
 	public String getHash() {
 		return hash;
 	}
+
 	public void setHash(String hash) {
 		this.hash = hash;
 	}
+
 	public String getIdAccount() {
 		return idAccount;
 	}
+
 	public void setIdAccount(String idAccount) {
 		this.idAccount = idAccount;
 	}
 
+	public boolean isConnected() {
+		return connected;
+	}
+
+	public void setConnected(boolean connected) {
+		this.connected = connected;
+	}
 }
