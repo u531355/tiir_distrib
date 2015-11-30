@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import model.Client;
-import service.InteractionBanque;
-import serviceImpl.InteractionBanqueImpl;
+import serviceimpl.InteractionBanqueImpl;
 
 @Controller
 public class IndexController {
 
-	private InteractionBanque interactionBanque = new InteractionBanqueImpl();
+	private InteractionBanqueImpl interactionBanque = new InteractionBanqueImpl();
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String index(Model model) {

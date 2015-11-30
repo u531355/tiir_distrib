@@ -1,4 +1,4 @@
-package serviceImpl;
+package serviceimpl;
 
 import model.Client;
 import model.Distributeur;
