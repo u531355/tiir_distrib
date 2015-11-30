@@ -28,5 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	       	
 	// TODO : A modifier pour faire l'authentification
 	// CF : http://docs.spring.io/spring-security/site/docs/4.0.x/reference/htmlsingle/#jc-form
+		auth
+        .inMemoryAuthentication()
+            .withUser("user").password("password").roles("USER");
 	}
 }
