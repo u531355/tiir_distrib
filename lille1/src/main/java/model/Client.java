@@ -10,11 +10,9 @@ import javax.persistence.Transient;
 import daoimpl.BanqueDaoImpl;
 
 public class Client {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_client")
+
 	private Integer idClient;
-	@Transient
+
 	private Banque myBank;
 	private String iban;
 	private String token;
