@@ -15,7 +15,7 @@ import service.InteractionBanque;
 public class Virement {
 	 
 	private InteractionBanque interactionBanque;
-	
+	/*
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String index(Model model) {
 		model.addAttribute("client", new Client());
@@ -34,5 +34,5 @@ public class Virement {
 		connected = true;
 		model.addAttribute("isConnected",isConnected);
 		return "option";
-	}
+	}*/
 }

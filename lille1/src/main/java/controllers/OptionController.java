@@ -16,6 +16,7 @@ public class OptionController {
 	 
 	private InteractionBanque interactionBanque;
 	
+	
 	@RequestMapping(value="/virement",method=RequestMethod.GET)
 	public String index(Model model, @ModelAttribute Client client) {
 		model.addAttribute("virement", new Virement());
