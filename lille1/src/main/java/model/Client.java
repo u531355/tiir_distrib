@@ -44,5 +44,9 @@ public class Client {
 	public void setToken(String token) {
 		this.token = token;
 	}
+	public void setIban(String iban) {
+		this.iban = iban;
+	}
+	
 
 }
