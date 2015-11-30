@@ -15,7 +15,7 @@ public class Banque implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_banque")
+	@Column(name="id_banque") 
 	private Integer idBanque;
 
 	@Column(name="iban_start")
