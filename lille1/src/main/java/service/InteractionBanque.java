@@ -4,7 +4,7 @@ import model.Banque;
 import model.Client;
 
 public interface InteractionBanque {
-	Banque connecter(Client client);
+	boolean connecter(Client client);
 	
 	
 }

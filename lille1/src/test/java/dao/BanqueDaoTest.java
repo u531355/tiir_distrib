@@ -14,7 +14,7 @@ public class BanqueDaoTest {
 
 	private Integer testAdd(String ibanStart, String url) {
 		BanqueDAO b = new BanqueDaoImpl();
-		Banque obj = new Banque(Integer.parseInt(ibanStart), url);
+		Banque obj = new Banque(ibanStart, url);
 		b.createBanque(obj);
 		System.out.println( "AJOUT : OK ; ID : " + obj.getIdBanque());
 		return obj.getIdBanque();
@@ -31,13 +31,13 @@ public class BanqueDaoTest {
 		System.out.println("FIND : OK");
 		return obj;
 	}
-	private Banque testFindByIban(int iban) {
+	private Banque testFindByIban(String iban) {
 		BanqueDAO b = new BanqueDaoImpl();
 		Banque obj = b.findByIban(iban);
 		System.out.println("FINDIBAN : OK");
 		return obj;
 	}
-	private void testUpdateBanque(Banque obj, int iban, String url) {
+	private void testUpdateBanque(Banque obj, String iban, String url) {
 		BanqueDAO b = new BanqueDaoImpl();
 		obj.setIbanStart(iban);
 		obj.setUrl(url);
@@ -48,8 +48,8 @@ public class BanqueDaoTest {
 	public String testBanqueDAO(@RequestParam(value = "ibanstart", defaultValue = "4269") String ibanStart,@RequestParam(value = "url", defaultValue = "www.google.fr") String url) {
 		Integer banqueId = testAdd(ibanStart, url);
 		Banque b = testFind(banqueId);
-		Banque b2 = testFindByIban(Integer.parseInt(ibanStart));
-		testUpdateBanque(b, 4270, url);
+		Banque b2 = testFindByIban(ibanStart);
+		testUpdateBanque(b, "4270", url);
 		testRemove(b);
 		return "ALL OK";
 		

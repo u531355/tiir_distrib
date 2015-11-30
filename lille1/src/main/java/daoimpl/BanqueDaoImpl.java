@@ -21,7 +21,7 @@ public class BanqueDaoImpl extends DaoImpl<Integer, Banque> implements BanqueDAO
 		return super.lister();
 	}
 	
-	public Banque findByIban(Integer ibanStart) {
+	public Banque findByIban(String ibanStart) {
 		return super.recherche("Select * from Banque where iban_start=:iban_start",ibanStart);
 	}
 
