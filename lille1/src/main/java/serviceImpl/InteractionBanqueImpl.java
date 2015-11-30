@@ -11,7 +11,7 @@ public class InteractionBanqueImpl implements service.InteractionBanque {
 	public static final int END_ID_BANQUE = 5;
 	public boolean connecter(Client client) {
 		BanqueDAO banquedao = new BanqueDaoImpl();
-		Banque b = banquedao.findByIban(client.getIban().substring(0, END_ID_BANQUE));
+		Banque b = banquedao.findByIban(client.getNumeroCarte().substring(0, END_ID_BANQUE));
 		return false;
 	}
 

@@ -19,14 +19,14 @@ public class Banque implements Serializable {
 	private Integer idBanque;
 
 	@Column(name="iban_start")
-	private String ibanStart;
+	private String cardStart;
 
 	private String url;
 
 	public Banque() {
 	}
 	public Banque(String ibanStart, String url) {
-		this.ibanStart = ibanStart;
+		this.cardStart = ibanStart;
 		this.url = url;
 	}
 
@@ -39,11 +39,11 @@ public class Banque implements Serializable {
 	}
 
 	public String getIbanStart() {
-		return this.ibanStart;
+		return this.cardStart;
 	}
 
 	public void setIbanStart(String ibanStart) {
-		this.ibanStart = ibanStart;
+		this.cardStart = ibanStart;
 	}
 
 	public String getUrl() {

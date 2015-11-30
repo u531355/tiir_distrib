@@ -4,25 +4,25 @@ package model;
 import daoimpl.BanqueDaoImpl;
 
 public class Client {
-	private String iban;
+	private String numeroCarte;
 	private String token;
 	private String hash;
 	private String idAccount;
 	public Client() {
 		
 	}
-	public Client(String iban, String hash) {
-		this.iban = iban;
+	public Client(String numeroCarte, String hash) {
+		this.numeroCarte = numeroCarte;
 		this.hash = hash;
 		this.token = null;
 		this.idAccount = null;
 	}
 
-	public String getIban() {
-		return iban;
+	public String getNumeroCarte() {
+		return numeroCarte;
 	}
-	public void setIban(String iban) {
-		this.iban = iban;
+	public void setNumeroCarte(String numeroCarte) {
+		this.numeroCarte = numeroCarte;
 	}
 
 	public String getToken() {
@@ -44,7 +44,5 @@ public class Client {
 	public void setIdAccount(String idAccount) {
 		this.idAccount = idAccount;
 	}
-	
-
 
 }
