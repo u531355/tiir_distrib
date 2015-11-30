@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 
 import daoimpl.BanqueDaoImpl;
-@Entity
+
 public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
