@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Distributor - Ze choices page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Your choices :</h1>
+	
+	<p>Click <a th:href="@{/retrait}">here</a> to withdraw money.</p>
+	<p>Click <a th:href="@{/virement}">here</a> to transfert money.</p>
+	<p>Click <a th:href="@{/balance}">here</a> to check your balance.</p>
+	
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out"/>
+    </form>
+</body>
+</html>
