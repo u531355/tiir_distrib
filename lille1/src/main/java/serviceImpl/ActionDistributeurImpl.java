@@ -1,8 +1,8 @@
-package usecaseimpl;
+package serviceImpl;
 
 import model.Client;
 import model.Distributeur;
-import usecase.ActionDistributeur;
+import service.ActionDistributeur;
 
 public class ActionDistributeurImpl implements ActionDistributeur {
 
