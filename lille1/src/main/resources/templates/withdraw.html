@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Distributor - Ze withdraw page</title>
+    </head>
+    <body>
+    	<h1>Money withdraw :</h1>
+     	<p> </p>
+        <form th:action="@{/virement}" method="post">
+            <div><label>Enter the account to withdraw money from :<input type="text" name="accountfrom"/> </label></div>
+            <div><label>Enter the amount to withdraw<input type="number" name="amount"/> </label></div>
+            <div><input type="submit" value="Withdraw money"/></div>
+        </form>
+    </body>
+</html>
