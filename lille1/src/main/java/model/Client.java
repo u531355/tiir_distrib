@@ -1,8 +1,13 @@
 package model;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+/**
+ * Object representing the data useful for communicate with the bank
+ * @author blanquart
+ *
+ */ 
 public class Client {
+	
 	private String numeroCarte;
 	private String token;
 	private String hash;
