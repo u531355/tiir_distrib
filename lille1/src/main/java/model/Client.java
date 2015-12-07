@@ -8,7 +8,7 @@ public class Client {
 	private String hash;
 	private String idAccount;
 	private boolean connected;
-
+	private Banque bank;
 	public Client() {
 
 	}
@@ -21,7 +21,12 @@ public class Client {
 		this.idAccount = null;
 		this.connected = false;
 	}
-
+	public Banque getBank() {
+		return bank;
+	}
+	public void setBank(Banque bank) {
+		this.bank = bank;
+	}
 	public String getNumeroCarte() {
 		return numeroCarte;
 	}
