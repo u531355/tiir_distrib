@@ -34,8 +34,8 @@ public class ActionDistributeurImpl implements ActionDistributeur {
 		JSONParser jsonresp = new JSONParser();
 		try {
 			Object o = jsonresp.parse(response);
-			JSONArray array = (JSONArray) o;
-			return (String)array.get(0);
+			JSONObject array = (JSONObject) o;
+			return (String)array.get("balance");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
