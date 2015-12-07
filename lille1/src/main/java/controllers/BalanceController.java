@@ -1,5 +1,6 @@
 package controllers;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,7 +15,7 @@ import serviceimpl.InteractionBanqueImpl;
  * Controller for the balance function of the ATM
  * TODO : Make it work ! Like other controllers..
  */
-@RestController
+@Controller
 public class BalanceController {
 
 	private InteractionBanqueImpl interactionBanque = new InteractionBanqueImpl();
