@@ -32,7 +32,7 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		String content = "";
 		JSONObject request = new JSONObject();
 		request.put("card_number", client.getNumeroCarte().substring(END_ID_BANQUE));
-		request.put("hashed_pin", client.getHash());
+		request.put("hashed_pin", client.getHash()); 
 		content = request.toJSONString();
 		String response = SendRequest.do_request("POST", b.getUrl()+LOGIN_URL, params, content);
 		if(response == null) {
@@ -42,9 +42,11 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		JSONParser jsonresp = new JSONParser();
 		try {
 			Object o = jsonresp.parse(response);
-			JSONArray array = (JSONArray) o;
-			client.setToken((String)array.get(0));
-			client.setIdAccount((String)array.get(2));
+			JSONObject array = (JSONObject) o;
+			if(array.get("token") == null && (Integer)array.get("id_account")==0 && array.get("end_of_validity")==null)
+				return false;
+			client.setToken((String)array.get("token"));
+			client.setIdAccount((String)array.get("id_account"));
 			client.setConnected(true);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
