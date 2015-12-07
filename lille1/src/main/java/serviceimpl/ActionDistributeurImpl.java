@@ -59,7 +59,7 @@ public class ActionDistributeurImpl implements ActionDistributeur {
 		DistributeurDAO ddao = new DistributeurDaoImpl();
 		Distributeur d = ddao.findById(ID_DISTRIBUTEUR);
 		d.setMontant(d.getMontant() - montant);
-		ddao.updateDistibuteur(d);
+		ddao.updateDistibuteur(d); 
 		return d;
 	}
 

@@ -32,7 +32,7 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		String content = "";
 		JSONObject request = new JSONObject();
 		request.put("card_number", client.getNumeroCarte().substring(END_ID_BANQUE));
-		request.put("hashed_pin", client.getHash());
+		request.put("hashed_pin", client.getHash()); 
 		content = request.toJSONString();
 		String response = SendRequest.do_request("POST", b.getUrl()+LOGIN_URL, params, content);
 		if(response == null) {
