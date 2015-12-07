@@ -7,6 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Service;
 
 import dao.DistributeurDAO;
 import daoimpl.DistributeurDaoImpl;
@@ -15,8 +16,12 @@ import model.Distributeur;
 import service.ActionDistributeur;
 import utils.SendRequest;
 
+@Service
 public class ActionDistributeurImpl implements ActionDistributeur {
 	public static final int ID_DISTRIBUTEUR = 42;
+	
+	
+	
 	@Override
 	public String afficherSolde(Client client) {
 		// TODO Auto-generated method stub

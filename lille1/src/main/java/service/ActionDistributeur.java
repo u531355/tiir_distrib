@@ -1,7 +1,10 @@
 package service;
 
+import org.springframework.stereotype.Service;
+
 import model.Client;
 import model.Distributeur;
+
 
 public interface ActionDistributeur {
 	String afficherSolde(Client client);

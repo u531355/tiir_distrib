@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
@@ -19,7 +20,6 @@ import service.InteractionBanque;
 import utils.SendRequest;
 
 @Service
-@Scope("singleton")
 public class InteractionBanqueImpl implements InteractionBanque {
 	public static final int END_ID_BANQUE = 5;
 	public static final String LOGIN_URL = "/account";

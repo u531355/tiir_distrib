@@ -1,5 +1,9 @@
+
 package controllers;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
@@ -10,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import model.Banque;
 import model.Client;
 import service.InteractionBanque;
+import serviceimpl.InteractionBanqueImpl;
 
 @Controller
 public class OptionController {
 	 
+	@Autowired
 	private InteractionBanque interactionBanque;
 	
 	
