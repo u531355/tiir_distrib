@@ -11,21 +11,20 @@ import model.Banque;
 import model.Client;
 import service.InteractionBanque;
 
+/**
+ * Controller for the "choices a user can make when logged in" function of the ATM
+ * TODO
+ */
 @Controller
-public class OptionController {
+public class ChoicesController {
 	 
 	private InteractionBanque interactionBanque;
 	
-	
-	@RequestMapping(value="/virement",method=RequestMethod.GET)
+	@RequestMapping(value="/choices",method=RequestMethod.GET)
 	public String index(Model model, @ModelAttribute Client client) {
-		model.addAttribute("virement", new Virement());
-		return "virement";
+
+		return "choices";
 	}
-	@RequestMapping(value="/virement",method=RequestMethod.POST)
-	public String index(@ModelAttribute Virement virement, Model model) {
-		
-		return "options";
-	}
+	
 	
 }
