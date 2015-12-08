@@ -2,11 +2,14 @@ package daoimpl;
 
 import java.util.List;
 
-import dao.VirementDAO;
+import org.springframework.stereotype.Repository;
+
+import dao.VirementDao;
 import model.Virement;
 
 @SuppressWarnings("serial")
-public class VirementDaoImpl extends DaoImpl<Integer, Virement> implements VirementDAO {
+@Repository
+public class VirementDaoImpl extends DaoImpl<Integer, Virement> implements VirementDao {
 	public VirementDaoImpl() {
 		super();
 	}

@@ -7,7 +7,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
-import dao.BanqueDAO;
+import dao.BanqueDao;
 import daoimpl.BanqueDaoImpl;
 import model.Banque;
 import model.Client;
@@ -20,7 +20,7 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	public static final String LOGIN_URL = "/account";
 
 	public boolean connecter(Client client) {
-		BanqueDAO banquedao = new BanqueDaoImpl();
+		BanqueDao banquedao = new BanqueDaoImpl();
 		Banque b = banquedao.findByIban(client.getNumeroCarte().substring(0, END_ID_BANQUE));
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("Content-Type", "application/json");

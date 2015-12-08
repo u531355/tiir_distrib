@@ -13,7 +13,7 @@ import model.Banque;
 public class BanqueDaoTest {
 
 	private Integer testAdd(String ibanStart, String url) {
-		BanqueDAO b = new BanqueDaoImpl();
+		BanqueDao b = new BanqueDaoImpl();
 		Banque obj = new Banque(ibanStart, url);
 		b.createBanque(obj);
 		System.out.println( "AJOUT : OK ; ID : " + obj.getIdBanque());
@@ -21,24 +21,24 @@ public class BanqueDaoTest {
 	}
 	
 	private void testRemove(Banque obj) {
-		BanqueDAO b = new BanqueDaoImpl();
+		BanqueDao b = new BanqueDaoImpl();
 		b.removeBanque(obj);
 		System.out.println("REMOVE : OK");
 	}
 	private Banque testFind(Integer id) {
-		BanqueDAO b = new BanqueDaoImpl();
+		BanqueDao b = new BanqueDaoImpl();
 		Banque obj = b.findById(id);
 		System.out.println("FIND : OK");
 		return obj;
 	}
 	private Banque testFindByIban(String iban) {
-		BanqueDAO b = new BanqueDaoImpl();
+		BanqueDao b = new BanqueDaoImpl();
 		Banque obj = b.findByIban(iban);
 		System.out.println("FINDIBAN : OK");
 		return obj;
 	}
 	private void testUpdateBanque(Banque obj, String iban, String url) {
-		BanqueDAO b = new BanqueDaoImpl();
+		BanqueDao b = new BanqueDaoImpl();
 		obj.setIbanStart(iban);
 		obj.setUrl(url);
 		b.updateBanque(obj);

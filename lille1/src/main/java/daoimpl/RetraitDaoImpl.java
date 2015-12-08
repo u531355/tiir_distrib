@@ -2,11 +2,14 @@ package daoimpl;
 
 import java.util.List;
 
-import dao.RetraitDAO;
+import org.springframework.stereotype.Repository;
+
+import dao.RetraitDao;
 import model.Retrait;
 
 @SuppressWarnings("serial")
-public class RetraitDaoImpl extends DaoImpl<Integer, Retrait> implements RetraitDAO {
+@Repository
+public class RetraitDaoImpl extends DaoImpl<Integer, Retrait> implements RetraitDao {
 	public RetraitDaoImpl() {
 		super();
 	}

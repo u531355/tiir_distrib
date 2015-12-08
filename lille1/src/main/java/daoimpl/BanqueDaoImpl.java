@@ -2,11 +2,14 @@ package daoimpl;
 
 import java.util.List;
 
-import dao.BanqueDAO;
+import org.springframework.stereotype.Repository;
+
+import dao.BanqueDao;
 import model.Banque;
 
 @SuppressWarnings("serial")
-public class BanqueDaoImpl extends DaoImpl<Integer, Banque> implements BanqueDAO {
+@Repository
+public class BanqueDaoImpl extends DaoImpl<Integer, Banque> implements BanqueDao {
 	public BanqueDaoImpl() {
 		super();
 	}
@@ -20,9 +23,9 @@ public class BanqueDaoImpl extends DaoImpl<Integer, Banque> implements BanqueDAO
 	public List<Banque> findAll() {
 		return super.lister();
 	}
-	
+
 	public Banque findByIban(String ibanStart) {
-		return super.recherche("Select * from Banque where iban_start=:iban_start",ibanStart);
+		return super.recherche("Select * from Banque where iban_start=:iban_start", ibanStart);
 	}
 
 	@Override

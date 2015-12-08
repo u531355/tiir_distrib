@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Banque;
 
-public interface BanqueDAO {
+public interface BanqueDao {
 	public Banque findById(Integer i);
 	public Banque findByIban(String i);
 	public List <Banque> findAll();

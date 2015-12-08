@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Distributeur;
 
-public interface DistributeurDAO {
+public interface DistributeurDao {
 	public Distributeur findById(Integer id);
 	public List <Distributeur> findAll();
 	public void removeDistributeur(Distributeur distrib);

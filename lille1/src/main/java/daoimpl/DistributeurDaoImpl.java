@@ -2,11 +2,14 @@ package daoimpl;
 
 import java.util.List;
 
-import dao.DistributeurDAO;
+import org.springframework.stereotype.Repository;
+
+import dao.DistributeurDao;
 import model.Distributeur;
 
 @SuppressWarnings("serial")
-public class DistributeurDaoImpl extends DaoImpl<Integer, Distributeur> implements DistributeurDAO {
+@Repository
+public class DistributeurDaoImpl extends DaoImpl<Integer, Distributeur> implements DistributeurDao {
 	public DistributeurDaoImpl() {
 		super();
 	}

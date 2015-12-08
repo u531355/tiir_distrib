@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Virement;
 
-public interface VirementDAO {
+public interface VirementDao {
 	public Virement findById(Integer i);
 	public List <Virement> findAll();
 	public void updateVirement(Virement v);

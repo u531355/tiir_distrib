@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Retrait;
 
-public interface RetraitDAO {
+public interface RetraitDao {
 	public Retrait findById(Integer i);
 	public List <Retrait> findAll();
 	public void createRetrait(Retrait r);
