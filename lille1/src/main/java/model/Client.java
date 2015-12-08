@@ -42,6 +42,10 @@ public class Client {
 		return numeroCarte;
 	}
 
+	public void setNumeroCarte(String numeroCarte) {
+		this.numeroCarte = numeroCarte;
+	}
+
 	public String getToken() {
 		return token;
 	}
@@ -52,6 +56,10 @@ public class Client {
 
 	public String getHash() {
 		return hash;
+	}
+
+	public void setHash(String hash) {
+		this.hash = hash;
 	}
 
 	public String getIdAccount() {
