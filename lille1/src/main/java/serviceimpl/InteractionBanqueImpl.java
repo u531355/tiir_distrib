@@ -34,6 +34,8 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	private BanqueDao banqueDao;
 
 	public boolean connecter(Client client) {
+		System.out.println("UN TEST");
+		System.out.println(client.getNumeroCarte());
 		Banque b = banqueDao.findByCardNumber(client.getNumeroCarte().substring(0, END_ID_BANQUE));
 		JSONObject request = new JSONObject();
 
