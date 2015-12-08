@@ -19,7 +19,7 @@ import java.util.HashMap;
  * Vous voulez vraiment réécrire un client http ? 
  */
 public class SendRequest {
-		public static String do_request(String method, String url, HashMap<String, String>  params, String content) {
+		public static String doRequest(String method, String url, HashMap<String, String>  params, String content) {
 			HttpURLConnection con = null;
 			URL obj = null;
 			try {
