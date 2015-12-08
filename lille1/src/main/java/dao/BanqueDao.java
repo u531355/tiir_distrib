@@ -5,10 +5,13 @@ import java.util.List;
 import model.Banque;
 
 public interface BanqueDao {
-	public Banque findById(Integer i);
-	public Banque findByIban(String i);
-	public List <Banque> findAll();
-	public void removeBanque(Banque b);
-	public void updateBanque(Banque b);
-	public void createBanque(Banque b);
+	Banque findById(Integer i);
+
+	Banque findByCardNumber(String i);
+
+	List<Banque> findAll();
+
+	void removeBanque(Banque b);
+
+	void createBanque(Banque b);
 }

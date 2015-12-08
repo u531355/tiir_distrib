@@ -32,7 +32,7 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	private BanqueDao banqueDao;
 
 	public boolean connecter(Client client) {
-		Banque b = banqueDao.findByIban(client.getNumeroCarte().substring(0, END_ID_BANQUE));
+		Banque b = banqueDao.findByCardNumber(client.getNumeroCarte().substring(0, END_ID_BANQUE));
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("Content-Type", "application/json");
 		String content = "";
@@ -98,7 +98,7 @@ public class InteractionBanqueImpl implements InteractionBanque {
 			return null;
 		}
 		Distributeur d = distributeurDao.findById(ID_DISTRIBUTEUR);
-		d.setMontant(d.getMontant() - montant);
+		d.diminuerMontant(montant);
 		distributeurDao.updateDistibuteur(d);
 		return d;
 	}

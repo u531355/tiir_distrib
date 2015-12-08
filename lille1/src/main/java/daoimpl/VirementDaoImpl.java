@@ -25,16 +25,6 @@ public class VirementDaoImpl extends DaoImpl<Integer, Virement> implements Virem
 	}
 
 	@Override
-	public void updateVirement(Virement v) {
-		super.mettreAJour(v);
-	}
-
-	@Override
-	public void removeVirement(Virement v) {
-		super.supprimer(v.getIdVirement());
-	}
-
-	@Override
 	public void createVirement(Virement v) {
 		super.enregistrer(v);
 	}

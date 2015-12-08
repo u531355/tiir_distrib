@@ -25,11 +25,6 @@ public class DistributeurDaoImpl extends DaoImpl<Integer, Distributeur> implemen
 	}
 
 	@Override
-	public void removeDistributeur(Distributeur distrib) {
-		super.supprimer(distrib.getIdDistributeur());
-	}
-
-	@Override
 	public void createDistributeur(Distributeur distrib) {
 		super.enregistrer(distrib);
 	}

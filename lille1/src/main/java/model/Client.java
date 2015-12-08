@@ -1,19 +1,22 @@
 package model;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 /**
- * Object representing the data useful for communicate with the bank
+ * Object representing the data useful for communicating with the bank
+ * 
  * @author blanquart
  *
- */ 
+ */
 public class Client {
-	
+
 	private String numeroCarte;
 	private String token;
 	private String hash;
 	private String idAccount;
 	private boolean connected;
 	private Banque bank;
+
 	public Client() {
 
 	}
@@ -26,18 +29,17 @@ public class Client {
 		this.idAccount = null;
 		this.connected = false;
 	}
+
 	public Banque getBank() {
 		return bank;
 	}
+
 	public void setBank(Banque bank) {
 		this.bank = bank;
 	}
+
 	public String getNumeroCarte() {
 		return numeroCarte;
-	}
-
-	public void setNumeroCarte(String numeroCarte) {
-		this.numeroCarte = numeroCarte;
 	}
 
 	public String getToken() {
@@ -50,10 +52,6 @@ public class Client {
 
 	public String getHash() {
 		return hash;
-	}
-
-	public void setHash(String hash) {
-		this.hash = hash;
 	}
 
 	public String getIdAccount() {

@@ -98,7 +98,7 @@ public abstract class DaoImpl<K, E> implements Dao<K, E> {
 		} catch (NoResultException e) {
 			return null;
 		} catch (NonUniqueResultException e) {
-			return null; // throw new InternalError();
+			throw new InternalError();
 		}
 	}
 }

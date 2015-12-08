@@ -29,14 +29,4 @@ public class RetraitDaoImpl extends DaoImpl<Integer, Retrait> implements Retrait
 		super.enregistrer(r);
 	}
 
-	@Override
-	public void deleteRetrait(Retrait r) {
-		super.supprimer(r.getIdRetrait());
-	}
-
-	@Override
-	public void updateRetrait(Retrait r) {
-		super.mettreAJour(r);
-	}
-
 }

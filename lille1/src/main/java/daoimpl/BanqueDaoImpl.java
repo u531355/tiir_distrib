@@ -24,8 +24,8 @@ public class BanqueDaoImpl extends DaoImpl<Integer, Banque> implements BanqueDao
 		return super.lister();
 	}
 
-	public Banque findByIban(String ibanStart) {
-		return super.recherche("Select * from Banque where iban_start=:iban_start", ibanStart);
+	public Banque findByCardNumber(String cardNumber) {
+		return super.recherche("Select * from Banque where card_start=:card_start", cardNumber);
 	}
 
 	@Override
@@ -34,13 +34,7 @@ public class BanqueDaoImpl extends DaoImpl<Integer, Banque> implements BanqueDao
 	}
 
 	@Override
-	public void updateBanque(Banque b) {
-		super.mettreAJour(b);
-	}
-
-	@Override
 	public void createBanque(Banque b) {
-		// TODO Auto-generated method stub
 		super.enregistrer(b);
 	}
 
