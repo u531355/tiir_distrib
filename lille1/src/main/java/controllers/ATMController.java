@@ -13,8 +13,8 @@ import service.InteractionBanque;
 import serviceimpl.InteractionBanqueImpl;
 
 /**
- * Controller for the balance function of the ATM TODO : Make it work ! Like
- * other controllers..
+ * Controller for the ATM functions
+ * TODO : Make it work ! Like other controllers..
  */
 @Controller
 public class ATMController {
@@ -51,10 +51,7 @@ public class ATMController {
 	///////////////////////
 	@RequestMapping(value = "/balance", method = RequestMethod.GET)
 	public String balance(@ModelAttribute("client") Client client, final BindingResult bindingResult, Model model) {
-		model.addAttribute("client", new Client());
-
-		String accountbalance;		
-		accountbalance = interactionbanque.afficherSolde(client);	
+		model.addAttribute("accountbalance", interactionbanque.afficherSolde(client));
 		
 		return "balance";
 	}
