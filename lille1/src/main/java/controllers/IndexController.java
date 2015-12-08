@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import model.Client;
 import service.InteractionBanque;
-import serviceimpl.InteractionBanqueImpl;
 
 @Controller
 public class IndexController {
 
 	@Autowired
-	private InteractionBanque interactionBanque ;
+	private InteractionBanque interactionBanque;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String index(Model model) {

@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
 
@@ -17,89 +16,89 @@ import dao.Dao;
 
 @SuppressWarnings("serial")
 public abstract class DaoImpl<K, E> implements Dao<K, E> {
-        private Class<E> entityClass;
+	private Class<E> entityClass;
 
-        @PersistenceContext(unitName="DAO-DB")
-        private EntityManager entityManager;
-        
-        @SuppressWarnings("unchecked")
-        public DaoImpl() {
-                ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
-                this.entityClass = (Class<E>) genericSuperclass.getActualTypeArguments()[1];
-        }
-        
-        public E rechercher(K id) {
-                return (E) entityManager.find(entityClass, id);
-        }
+	@PersistenceContext(unitName = "DAO-DB")
+	private EntityManager entityManager;
 
-        public E enregistrer(E entité) {
-        		System.out.println(entityManager);
-                entityManager.persist(entité);
-                return entité;
-        }
+	@SuppressWarnings("unchecked")
+	public DaoImpl() {
+		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
+		this.entityClass = (Class<E>) genericSuperclass.getActualTypeArguments()[1];
+	}
 
-        public E mettreAJour(E entité) {
-                return entityManager.merge(entité);             
-        }
+	public E rechercher(K id) {
+		return (E) entityManager.find(entityClass, id);
+	}
 
-        public E recharger(K id) {
-                E entité = rechercher(id);
-                entityManager.refresh(entité);
-                return entité;
-        }
+	public E enregistrer(E entité) {
+		System.out.println(entityManager);
+		entityManager.persist(entité);
+		return entité;
+	}
 
-        public void supprimer(K id) {
-                E entité = rechercher(id);
-                entityManager.remove(entité);
-        }
+	public E mettreAJour(E entité) {
+		return entityManager.merge(entité);
+	}
 
-        public List<E> lister() {
-                return liste("select x from " + entityClass.getName() + " x");
-        }
+	public E recharger(K id) {
+		E entité = rechercher(id);
+		entityManager.refresh(entité);
+		return entité;
+	}
 
-        protected List<E> liste(String queryString, Object... params) {
-                List<E> entités = null;
-                TypedQuery<E> query = entityManager.createQuery(queryString, entityClass);
-                int i = 0, j = 1;
-                while(i < params.length) {
-                        if (params[i] instanceof Date ) {
-                                query.setParameter(j, (Date)params[i], (TemporalType) params[i+1]);
-                                i+=2; 
-                        } else if (params[i] instanceof Calendar) {
-                                query.setParameter(j, (Calendar)params[i], (TemporalType) params[i+1]);
-                                i+=2; 
-                        } else {
-                                query.setParameter(j, params[i]);
-                                i++; 
-                        }
-                        j++;
-                }
-                entités = query.getResultList();
-                return entités;
-        }
+	public void supprimer(K id) {
+		E entité = rechercher(id);
+		entityManager.remove(entité);
+	}
 
-        protected E recherche(String queryString, Object... params) {
-                try {
-                        TypedQuery<E> query = entityManager.createQuery(queryString, entityClass);
-                        int i = 0, j = 1;
-                        while(i < params.length) {
-                                if (params[i] instanceof Date ) {
-                                        query.setParameter(j, (Date)params[i], (TemporalType) params[i+1]);
-                                        i+=2; 
-                                } else if (params[i] instanceof Calendar) {
-                                        query.setParameter(j, (Calendar)params[i], (TemporalType) params[i+1]);
-                                        i+=2; 
-                                } else {
-                                        query.setParameter(j, params[i]);
-                                        i++; 
-                                }
-                                j++;
-                        }
-                        return (E) query.getSingleResult();
-                } catch (NoResultException e) {
-                        return null;
-                } catch (NonUniqueResultException e) {
-                        return null; // throw new InternalError();
-                }
-        }
+	public List<E> lister() {
+		return liste("select x from " + entityClass.getName() + " x");
+	}
+
+	protected List<E> liste(String queryString, Object... params) {
+		List<E> entités = null;
+		TypedQuery<E> query = entityManager.createQuery(queryString, entityClass);
+		int i = 0, j = 1;
+		while (i < params.length) {
+			if (params[i] instanceof Date) {
+				query.setParameter(j, (Date) params[i], (TemporalType) params[i + 1]);
+				i += 2;
+			} else if (params[i] instanceof Calendar) {
+				query.setParameter(j, (Calendar) params[i], (TemporalType) params[i + 1]);
+				i += 2;
+			} else {
+				query.setParameter(j, params[i]);
+				i++;
+			}
+			j++;
+		}
+		entités = query.getResultList();
+		return entités;
+	}
+
+	protected E recherche(String queryString, Object... params) {
+		try {
+			TypedQuery<E> query = entityManager.createQuery(queryString, entityClass);
+			int i = 0, j = 1;
+			while (i < params.length) {
+				if (params[i] instanceof Date) {
+					query.setParameter(j, (Date) params[i], (TemporalType) params[i + 1]);
+					i += 2;
+				} else if (params[i] instanceof Calendar) {
+					query.setParameter(j, (Calendar) params[i], (TemporalType) params[i + 1]);
+					i += 2;
+				} else {
+					query.setParameter(j, params[i]);
+					i++;
+				}
+				j++;
+			}
+			return (E) query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		} catch (NonUniqueResultException e) {
+			return null; // throw new InternalError();
+		}
+	}
 }

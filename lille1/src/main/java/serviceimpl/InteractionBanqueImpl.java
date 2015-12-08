@@ -2,15 +2,10 @@ package serviceimpl;
 
 import java.util.HashMap;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 import dao.BanqueDAO;
 import daoimpl.BanqueDaoImpl;
@@ -27,15 +22,15 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	public boolean connecter(Client client) {
 		BanqueDAO banquedao = new BanqueDaoImpl();
 		Banque b = banquedao.findByIban(client.getNumeroCarte().substring(0, END_ID_BANQUE));
-		HashMap<String, String> params = new HashMap<String,String> ();
+		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("Content-Type", "application/json");
 		String content = "";
 		JSONObject request = new JSONObject();
 		request.put("card_number", client.getNumeroCarte().substring(END_ID_BANQUE));
-		request.put("hashed_pin", client.getHash()); 
+		request.put("hashed_pin", client.getHash());
 		content = request.toJSONString();
-		String response = SendRequest.do_request("POST", b.getUrl()+LOGIN_URL, params, content);
-		if(response == null) {
+		String response = SendRequest.do_request("POST", b.getUrl() + LOGIN_URL, params, content);
+		if (response == null) {
 			client.setConnected(false);
 			return false;
 		}
@@ -43,10 +38,11 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		try {
 			Object o = jsonresp.parse(response);
 			JSONObject array = (JSONObject) o;
-			if(array.get("token") == null && (Integer)array.get("id_account")==0 && array.get("end_of_validity")==null)
+			if (array.get("token") == null && (Integer) array.get("id_account") == 0
+					&& array.get("end_of_validity") == null)
 				return false;
-			client.setToken((String)array.get("token"));
-			client.setIdAccount((String)array.get("id_account"));
+			client.setToken((String) array.get("token"));
+			client.setIdAccount((String) array.get("id_account"));
 			client.setConnected(true);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
