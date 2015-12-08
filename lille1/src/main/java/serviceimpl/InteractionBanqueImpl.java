@@ -9,6 +9,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,8 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	private BanqueDao banqueDao;
 
 	public boolean connecter(Client client) {
+		System.out.println("UN TEST");
+		System.out.println(client.getNumeroCarte());
 		Banque b = banqueDao.findByCardNumber(client.getNumeroCarte().substring(0, END_ID_BANQUE));
 		JSONObject request = new JSONObject();
 
@@ -49,19 +52,17 @@ public class InteractionBanqueImpl implements InteractionBanque {
 
 			JSONObject jResponse = new JSONObject(response);
 
-			String token = jResponse.getString("token"); // get the name from
-															// data.
-			String id = jResponse.getString("id_account"); // get the name from
-															// data.
+			String token = jResponse.getString("token");
+			String id = jResponse.getString("id_account");
 			String validity = (String) jResponse.get("end_of_validity");
 
 			if (token == null || id == "0" || validity == null)
 				return false;
 			client.setToken(token);
-			client.setIdAccount((String) id);
+			client.setIdAccount(id);
 			client.setConnected(true);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (IOException | JSONException e) {
+			return false;
 		}
 		client.setBank(b);
 		return true;
@@ -83,7 +84,6 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	}
 
 	public static String sendRequest(JSONObject toSend, String url) throws IOException {
-
 		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost(url);
 		StringEntity params = new StringEntity(toSend.toString());
@@ -94,7 +94,6 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		HttpEntity entity = response.getEntity();
 		String responseString = EntityUtils.toString(entity, "UTF-8");
 		return responseString;
-
 	}
 
 }
