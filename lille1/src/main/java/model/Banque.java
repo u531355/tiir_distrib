@@ -31,8 +31,8 @@ public class Banque implements Serializable {
 	public Banque() {
 	}
 
-	public Banque(String ibanStart, String url) {
-		this.cardStart = ibanStart;
+	public Banque(String cardStart, String url) {
+		this.cardStart = cardStart;
 		this.url = url;
 	}
 
