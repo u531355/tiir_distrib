@@ -25,11 +25,7 @@ public class IndexController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String index(@ModelAttribute("client") Client client, final BindingResult bindingResult, Model model) {
-		System.out.println(client.getHash());
-
-		String hash = client.getHash();
 		boolean response = interactionBanque.connecter(client);
-
 		if (response == false) {
 			model.addAttribute("error", "Erreur de connexion");
 			return "index";
