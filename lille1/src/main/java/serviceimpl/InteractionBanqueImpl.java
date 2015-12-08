@@ -1,10 +1,16 @@
 package serviceimpl;
 
-import java.util.HashMap;
+import java.io.IOException;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
+import org.json.JSONObject;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +19,9 @@ import dao.DistributeurDao;
 import dao.RetraitDao;
 import model.Banque;
 import model.Client;
-import model.Distributeur;
-import model.Retrait;
+
 import service.InteractionBanque;
-import utils.SendRequest;
+
 
 @Service
 public class InteractionBanqueImpl implements InteractionBanque {
@@ -30,33 +35,37 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	private RetraitDao retraitDao;
 	@Autowired
 	private BanqueDao banqueDao;
+	
 
 	public boolean connecter(Client client) {
 		Banque b = banqueDao.findByIban(client.getNumeroCarte().substring(0, END_ID_BANQUE));
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("Content-Type", "application/json");
-		String content = "";
+
 		JSONObject request = new JSONObject();
-		request.put("card_number", client.getNumeroCarte().substring(END_ID_BANQUE));
-		request.put("hashed_pin", client.getHash());
-		content = request.toJSONString();
-		String response = SendRequest.doRequest("POST", b.getUrl() + LOGIN_URL, params, content);
-		if (response == null) {
-			client.setConnected(false);
-			return false;
-		}
-		JSONParser jsonresp = new JSONParser();
+		
+		
 		try {
-			Object o = jsonresp.parse(response);
-			JSONObject array = (JSONObject) o;
-			if (array.get("token") == null && (Integer) array.get("id_account") == 0
-					&& array.get("end_of_validity") == null)
+			request.append("card_number", client.getNumeroCarte().substring(END_ID_BANQUE));
+			request.append("hashed_pin", client.getHash());
+			String response = sendRequest(request, b.getUrl()+"/token");
+		
+			if (response == null) {
+				client.setConnected(false);
 				return false;
-			client.setToken((String) array.get("token"));
-			client.setIdAccount((String) array.get("id_account"));
+			}
+			
+			JSONObject jResponse  = new JSONObject(response); 
+	
+			String token = jResponse.getString("token"); // get the name from data.
+			String id = jResponse.getString("id_account"); // get the name from data.
+			String validity = (String) jResponse.get("end_of_validity");
+
+			
+			if (token == null ||  id == "0" || validity == null)
+				return false;
+			client.setToken(token);
+			client.setIdAccount((String) id);
 			client.setConnected(true);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		client.setBank(b);
@@ -65,61 +74,33 @@ public class InteractionBanqueImpl implements InteractionBanque {
 
 	@Override
 	public String afficherSolde(Client client) {
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("Content-Type", "application/json");
-		params.put("Token", client.getToken());
-		String response = SendRequest.doRequest("POST",
-				client.getBank().getUrl() + "/" + client.getIdAccount() + "/" + "balance", params, "");
-		if (response == null) {
-			return null;
-		}
-		JSONParser jsonresp = new JSONParser();
-		try {
-			Object o = jsonresp.parse(response);
-			JSONObject array = (JSONObject) o;
-			return (String) array.get("balance");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return "";
+		
 	}
 
 	@Override
-	public Distributeur retrait(Client client, double montant) {
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("Content-Type", "application/json");
-		params.put("Token", client.getToken());
-		JSONObject json = new JSONObject();
-		json.put("amount", montant);
-		String response = SendRequest.doRequest("POST",
-				client.getBank().getUrl() + "/" + client.getIdAccount() + "/" + "debit", params, json.toJSONString());
-		if (response == null) {
-			return null;
-		}
-		Distributeur d = distributeurDao.findById(ID_DISTRIBUTEUR);
-		d.setMontant(d.getMontant() - montant);
-		distributeurDao.updateDistibuteur(d);
-		return d;
+	public boolean retrait(Client client, double montant) {
+		return true;
 	}
 
 	@Override
-	public Retrait virement(Client client, double montant, String ibanTo) {
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("Content-Type", "application/json");
-		params.put("Token", client.getToken());
-		JSONObject json = new JSONObject();
-		json.put("amount", montant);
-		json.put("recipient", ibanTo.substring(InteractionBanqueImpl.END_ID_BANQUE));
-		String response = SendRequest.doRequest("POST",
-				client.getBank().getUrl() + "/" + client.getIdAccount() + "/" + "transfer", params,
-				json.toJSONString());
-		if (response == null) {
-			return null;
-		}
-		Retrait r = new Retrait(Integer.parseInt(client.getNumeroCarte()), Integer.parseInt(ibanTo), montant);
-		retraitDao.createRetrait(r);
-		return r;
+	public boolean virement(Client client, double montant, String ibanTo) {
+		return true;
 	}
-
+	
+	public static String sendRequest(JSONObject toSend, String url) throws IOException {
+		
+		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+	    HttpPost request = new HttpPost(url);
+	    StringEntity params = new StringEntity(toSend.toString());
+	    request.addHeader("content-type", "application/json");
+	    request.setEntity(params);
+	    HttpResponse response = httpClient.execute(request);
+	    httpClient.close();
+		HttpEntity entity = response.getEntity();
+		String responseString = EntityUtils.toString(entity, "UTF-8");
+		return responseString;
+	
+	}
+	
 }

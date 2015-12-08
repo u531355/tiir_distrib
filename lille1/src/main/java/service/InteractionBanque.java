@@ -27,7 +27,7 @@ public interface InteractionBanque {
 	 * @param montant
 	 * @return
 	 */
-	Distributeur retrait(Client client, double montant);
+	boolean retrait(Client client, double montant);
 
 	/**
 	 * transfer montant euro from the client to the IbanTo Account
@@ -37,6 +37,6 @@ public interface InteractionBanque {
 	 * @param ibanTo
 	 * @return
 	 */
-	Retrait virement(Client client, double montant, String ibanTo);
+	boolean virement(Client client, double montant, String ibanTo);
 
 }
