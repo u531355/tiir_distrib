@@ -1,13 +1,16 @@
 package fil.tiir.fakedistrib.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import fil.tiir.fakedistrib.entity.Client;
 import fil.tiir.fakedistrib.service.InteractionBanque;
@@ -25,30 +28,28 @@ public class LoginController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String login(Model model, HttpSession session) {
-		model.addAttribute(model);
+		Client client = new Client();
+		model.addAttribute("client",client); //A voir si vraiment nécessaire
 		return "login";
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String login(Model model, HttpSession session, @RequestParam("usercard") String usercard,
-			@RequestParam("password") String password) {
-
-		String hashofpass = HashUtil.SHA1(password);
-
-		Client client = new Client(usercard, hashofpass);
-		boolean response = interactionBanque.connecter(client);
-
-		// Connection failed
-		if (response == false) {
-			model.addAttribute("error", "Erreur de connexion");
-			return "redirect:/login?error=wrongloginpass";
+	public String login(@ModelAttribute("client") Client client, Model model) {
+	
+		client.setHash(HashUtil.SHA1(client.getHash())); //Change le password en un hash 
+		try {
+			interactionBanque.connecter(client);
+		} catch (JSONException e) {
+			model.addAttribute("error", "Erreure de communication avec le serveur");
+			return "login";
+		} catch (IOException e) {
+			model.addAttribute("error", "Erreure de connexion avec le serveur");
+			return "login";
 		}
-
-		// Connection succeeded
-		client.setConnected(true);
-		session.setAttribute("token", client.getToken());
-		model.addAttribute("reponse", response);
-
+		if (client.isConnected()) 
+			return "choices";
+		//Client not connected
+		model.addAttribute("error", "Vérifier vos identifiants");
 		return "login";
 	}
 }

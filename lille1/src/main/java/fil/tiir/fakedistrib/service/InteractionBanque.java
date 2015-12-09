@@ -1,15 +1,17 @@
 package fil.tiir.fakedistrib.service;
 
+import java.io.IOException;
+
+import org.json.JSONException;
+
 import fil.tiir.fakedistrib.entity.Client;
-import fil.tiir.fakedistrib.entity.Distributeur;
-import fil.tiir.fakedistrib.entity.Retrait;
 
 public interface InteractionBanque {
 	/**
 	 * @param client
 	 * @return
 	 */
-	boolean connecter(Client client);
+	void connecter(Client client) throws JSONException, IOException;
 
 	/**
 	 * Display the solde of the client in this account
