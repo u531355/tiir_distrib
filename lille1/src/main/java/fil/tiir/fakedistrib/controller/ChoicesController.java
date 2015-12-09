@@ -21,7 +21,7 @@ public class ChoicesController {
 	private InteractionBanque interactionBanque;
 
 	@RequestMapping(value = "/choices", method = RequestMethod.GET)
-	public String index(Model model, @ModelAttribute Client client) {
+	public String choices(Model model, @ModelAttribute Client client) {
 		return "choices";
 	}
 
