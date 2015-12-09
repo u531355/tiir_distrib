@@ -22,12 +22,12 @@ public class BalanceController {
 	private InteractionBanqueImpl interactionbanque;
 
 	/**
-	 * 
+	 * Est sensé fonctionner de base (tant que afficherSolde marche)
 	 */
 	@RequestMapping(value = "/balance", method = RequestMethod.GET)
 	public String balance(@ModelAttribute("client") Client client, final BindingResult bindingResult, Model model) {
-		model.addAttribute("accountbalance", interactionbanque.afficherSolde(client));
 		
+		model.addAttribute("accountbalance", interactionbanque.afficherSolde(client));
 		return "balance";
 	}
 }
