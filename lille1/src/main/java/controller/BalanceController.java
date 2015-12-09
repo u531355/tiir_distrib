@@ -1,5 +1,6 @@
 package controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,21 +18,16 @@ import serviceimpl.InteractionBanqueImpl;
 @Controller
 public class BalanceController {
 
-	private InteractionBanqueImpl interactionBanque = new InteractionBanqueImpl();
+	@Autowired
+	private InteractionBanqueImpl interactionbanque;
 
+	/**
+	 * 
+	 */
 	@RequestMapping(value = "/balance", method = RequestMethod.GET)
 	public String balance(@ModelAttribute("client") Client client, final BindingResult bindingResult, Model model) {
-		model.addAttribute("client", new Client());
-
-		System.out.println(client.getHash());
-		boolean response = interactionBanque.connecter(client);
-		if (response == false) {
-			model.addAttribute("error", "Erreur de connexion");
-			return "index";
-		}
-		client.setConnected(true);
-		model.addAttribute("reponse", response);
-
+		model.addAttribute("accountbalance", interactionbanque.afficherSolde(client));
+		
 		return "balance";
 	}
 }

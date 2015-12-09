@@ -1,10 +1,14 @@
 package controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import model.Client;
 import service.InteractionBanque;
@@ -16,25 +20,25 @@ import service.InteractionBanque;
 @Controller
 public class TransfertControler {
 
-	private InteractionBanque interactionBanque;
+	@Autowired
+	private InteractionBanque interactionbanque;
 
 	@RequestMapping(value = "/transfert", method = RequestMethod.GET)
-	public String index(Model model) {
-		model.addAttribute("client", new Client());
-		model.addAttribute("connected", false);
+	public String transfert(Model model, HttpSession session) {
+		model.addAttribute(model);
 		return "transfert";
 	}
 
 	@RequestMapping(value = "/transfert", method = RequestMethod.POST)
-	public String index(@ModelAttribute Client client, @ModelAttribute Boolean connected, Model model) {
-		Boolean isConnected = interactionBanque.connecter(client);
-		if (isConnected == false) {
-			connected = false;
-			model.addAttribute("error", "Erreur de connexion");
-			return "index";
-		}
-		connected = true;
-		model.addAttribute("isConnected", isConnected);
+	public String transfert(Model model, 
+								HttpSession session, 
+								@RequestParam("accountfrom") String accountfrom,
+								@RequestParam("accountto") String accountto,
+								@RequestParam("amount") String amount) {
+		
+		model.addAttribute(model);
+		//TODO : handling the money transfert transfert
 		return "transfert";
+		
 	}
 }

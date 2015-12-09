@@ -1,5 +1,6 @@
 package controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,7 +17,8 @@ import service.InteractionBanque;
 @Controller
 public class ChoicesController {
 
-	private InteractionBanque interactionBanque;
+	@Autowired
+	private InteractionBanque interactionbanque;
 
 	@RequestMapping(value = "/choices", method = RequestMethod.GET)
 	public String index(Model model, @ModelAttribute Client client) {
