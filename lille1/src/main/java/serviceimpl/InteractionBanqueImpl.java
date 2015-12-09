@@ -27,17 +27,18 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	public static final int ID_DISTRIBUTEUR = 42;
 	public static final String LOGIN_URL = "/account";
 
-	@Autowired
-	private DistributeurDao distributeurDao;
-	@Autowired
-	private RetraitDao retraitDao;
+	//@Autowired
+	//private DistributeurDao distributeurDao;
+	//@Autowired
+	//private RetraitDao retraitDao;
 	@Autowired
 	private BanqueDao banqueDao;
 
 	public boolean connecter(Client client) {
 		System.out.println("UN TEST");
 		System.out.println(client.getNumeroCarte());
-		Banque b = banqueDao.findByCardNumber(client.getNumeroCarte().substring(0, END_ID_BANQUE));
+		String cardStart = client.getNumeroCarte().substring(0, END_ID_BANQUE);
+		Banque b = banqueDao.findByCardNumber(cardStart);
 		JSONObject request = new JSONObject();
 
 		try {

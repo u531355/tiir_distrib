@@ -18,7 +18,7 @@ import dao.Dao;
 public abstract class DaoImpl<K, E> implements Dao<K, E> {
 	private Class<E> entityClass;
 
-	@PersistenceContext(unitName = "DAO-DB")
+	@PersistenceContext(name="pu")
 	private EntityManager entityManager;
 
 	@SuppressWarnings("unchecked")
@@ -58,6 +58,7 @@ public abstract class DaoImpl<K, E> implements Dao<K, E> {
 
 	protected List<E> liste(String queryString, Object... params) {
 		List<E> entités = null;
+		
 		TypedQuery<E> query = entityManager.createQuery(queryString, entityClass);
 		int i = 0, j = 1;
 		while (i < params.length) {
@@ -79,6 +80,7 @@ public abstract class DaoImpl<K, E> implements Dao<K, E> {
 
 	protected E recherche(String queryString, Object... params) {
 		try {
+
 			TypedQuery<E> query = entityManager.createQuery(queryString, entityClass);
 			int i = 0, j = 1;
 			while (i < params.length) {
@@ -94,6 +96,7 @@ public abstract class DaoImpl<K, E> implements Dao<K, E> {
 				}
 				j++;
 			}
+			System.out.println("test"+query.toString());
 			return (E) query.getSingleResult();
 		} catch (NoResultException e) {
 			return null;
