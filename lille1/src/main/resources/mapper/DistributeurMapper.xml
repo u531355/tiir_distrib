@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace="fil.tiir.fakedistrib.dao.DistributeurDao">
+
+	<resultMap type="fil.tiir.fakedistrib.dao.DistributeurDao" id="distributeurResultMap">
+		<id property='idDistributeur' column='id_distributeur' />
+		<result property='montant' column='montant' />
+	</resultMap>
+
+	<select id="getAll" resultMap="distributeurResultMap">
+		select * from distributeur;
+	</select>
+
+</mapper>
