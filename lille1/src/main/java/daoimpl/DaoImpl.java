@@ -6,8 +6,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TemporalType;
 import javax.persistence.TypedQuery;
@@ -18,38 +20,41 @@ import dao.Dao;
 public abstract class DaoImpl<K, E> implements Dao<K, E> {
 	private Class<E> entityClass;
 
-	@PersistenceContext(name="pu")
-	private EntityManager entityManager;
 
+	@PersistenceContext(unitName = "pu")
+	private EntityManager em;
+
+	
 	@SuppressWarnings("unchecked")
 	public DaoImpl() {
 		ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
 		this.entityClass = (Class<E>) genericSuperclass.getActualTypeArguments()[1];
+		
 	}
 
 	public E rechercher(K id) {
-		return (E) entityManager.find(entityClass, id);
+		return (E) em.find(entityClass, id);
 	}
 
 	public E enregistrer(E entité) {
-		System.out.println(entityManager);
-		entityManager.persist(entité);
+		System.out.println(em);
+		em.persist(entité);
 		return entité;
 	}
 
 	public E mettreAJour(E entité) {
-		return entityManager.merge(entité);
+		return em.merge(entité);
 	}
 
 	public E recharger(K id) {
 		E entité = rechercher(id);
-		entityManager.refresh(entité);
+		em.refresh(entité);
 		return entité;
 	}
 
 	public void supprimer(K id) {
 		E entité = rechercher(id);
-		entityManager.remove(entité);
+		em.remove(entité);
 	}
 
 	public List<E> lister() {
@@ -59,7 +64,7 @@ public abstract class DaoImpl<K, E> implements Dao<K, E> {
 	protected List<E> liste(String queryString, Object... params) {
 		List<E> entités = null;
 		
-		TypedQuery<E> query = entityManager.createQuery(queryString, entityClass);
+		TypedQuery<E> query = em.createQuery(queryString, entityClass);
 		int i = 0, j = 1;
 		while (i < params.length) {
 			if (params[i] instanceof Date) {
@@ -81,7 +86,7 @@ public abstract class DaoImpl<K, E> implements Dao<K, E> {
 	protected E recherche(String queryString, Object... params) {
 		try {
 
-			TypedQuery<E> query = entityManager.createQuery(queryString, entityClass);
+			TypedQuery<E> query = em.createQuery(queryString, entityClass);
 			int i = 0, j = 1;
 			while (i < params.length) {
 				if (params[i] instanceof Date) {

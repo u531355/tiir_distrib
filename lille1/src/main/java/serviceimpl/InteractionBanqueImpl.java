@@ -15,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.BanqueDao;
-import dao.DistributeurDao;
-import dao.RetraitDao;
 import model.Banque;
 import model.Client;
 import service.InteractionBanque;
@@ -39,6 +37,7 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		System.out.println(client.getNumeroCarte());
 		String cardStart = client.getNumeroCarte().substring(0, END_ID_BANQUE);
 		Banque b = banqueDao.findByCardNumber(cardStart);
+
 		JSONObject request = new JSONObject();
 
 		try {

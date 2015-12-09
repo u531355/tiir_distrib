@@ -13,7 +13,7 @@ public class BanqueDaoImpl extends DaoImpl<Integer, Banque> implements BanqueDao
 	public BanqueDaoImpl() {
 		super();
 	}
-
+	
 	@Override
 	public Banque findById(Integer i) {
 		return super.rechercher(i);
