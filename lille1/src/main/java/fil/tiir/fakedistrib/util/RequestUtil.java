@@ -12,6 +12,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 public class RequestUtil {
+	public static String sendRequest(JSONObject toSend, String url) throws IOException {
+		return sendRequest(toSend, url, null);
+	}
+
 	public static String sendRequest(JSONObject toSend, String url, String token) throws IOException {
 		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost(url);

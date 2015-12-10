@@ -43,7 +43,7 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		}
 		String response;
 		try {
-			response = RequestUtil.sendRequest(request, b.getUrl() + "/token", null);
+			response = RequestUtil.sendRequest(request, b.getUrl() + "/token");
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		}
