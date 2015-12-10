@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fil.tiir.fakedistrib.dao.BanqueDao;
-import fil.tiir.fakedistrib.dao.DistributeurDao;
 import fil.tiir.fakedistrib.dao.RetraitDao;
 import fil.tiir.fakedistrib.dao.VirementDao;
 import fil.tiir.fakedistrib.entity.Banque;
@@ -25,8 +24,6 @@ public class InteractionBanqueImpl implements InteractionBanque {
 
 	@Autowired
 	private BanqueDao banqueDao;
-	@Autowired
-	private DistributeurDao distributeurDao;
 	@Autowired
 	private RetraitDao retraitDao;
 	@Autowired
@@ -68,7 +65,6 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		client.setToken(token);
 		client.setIdAccount(id);
 		client.setBank(b);
-		// TODO put client in session
 	}
 
 	@Override
@@ -93,7 +89,7 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	}
 
 	@Override
-	public boolean retrait(Client client, double montant) throws InteractionBanqueException {
+	public void retrait(Client client, double montant) throws InteractionBanqueException {
 		JSONObject request = new JSONObject();
 		try {
 			request.append("amount", montant);
@@ -107,12 +103,10 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		}
-
-		return true;
 	}
 
 	@Override
-	public boolean virement(Client client, double montant, String ibanTo) throws InteractionBanqueException {
+	public void virement(Client client, double montant, String ibanTo) throws InteractionBanqueException {
 		JSONObject request = new JSONObject();
 
 		try {
@@ -128,11 +122,6 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		}
-
-		if (response == null)
-			return false;
-
-		return true;
 	}
 
 }

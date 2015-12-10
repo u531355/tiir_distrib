@@ -26,13 +26,14 @@ public class LoginController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String login(Model model, HttpSession session) {
-		Client client = new Client();
-		model.addAttribute("client", client); // A voir si vraiment nécessaire
+		Client client = (Client) session.getAttribute("client");
+		if (client != null)
+			return "redirect:/choices";
 		return "login";
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String login(@ModelAttribute("client") Client client, Model model) {
+	public String login(@ModelAttribute("client") Client client, Model model, HttpSession session) {
 		// Change le password en hash
 		client.setHash(HashUtil.SHA1(client.getHash()));
 		try {
@@ -41,6 +42,7 @@ public class LoginController {
 			model.addAttribute("error", e.getMessage());
 			return "login";
 		}
+		session.setAttribute("client", client);
 		return "redirect:/choices";
 	}
 }
