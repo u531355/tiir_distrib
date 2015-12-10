@@ -6,5 +6,5 @@ import fil.tiir.fakedistrib.entity.Virement;
 
 public interface VirementDao {
 	List<Virement> getAll();
-	void insert(Virement v);
+	void insert(Virement v); 
 }
