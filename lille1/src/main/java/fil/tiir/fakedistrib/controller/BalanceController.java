@@ -1,8 +1,5 @@
 package fil.tiir.fakedistrib.controller;
 
-import java.io.IOException;
-
-import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fil.tiir.fakedistrib.entity.Client;
+import fil.tiir.fakedistrib.exception.InteractionBanqueException;
 import fil.tiir.fakedistrib.service.InteractionBanque;
 
 /**
@@ -31,11 +29,8 @@ public class BalanceController {
 	public String balance(@ModelAttribute("client") Client client, final BindingResult bindingResult, Model model) {
 		try {
 			model.addAttribute("accountbalance", interactionBanque.afficherSolde(client));
-		} catch (JSONException e) {
-			model.addAttribute("error", "Erreur de communication avec le serveur");
-			return "error";
-		} catch (IOException e) {
-			model.addAttribute("error", "Erreur de connection avec le serveur");
+		} catch (InteractionBanqueException e) {
+			model.addAttribute("error", e.getMessage());
 			return "error";
 		}
 		return "balance";
