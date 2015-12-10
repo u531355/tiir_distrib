@@ -4,7 +4,7 @@
 
 <mapper namespace="fil.tiir.fakedistrib.dao.BanqueDao">
 
-	<resultMap type="fil.tiir.fakedistrib.dao.BanqueDao" id="banqueResultMap">
+	<resultMap type="fil.tiir.fakedistrib.entity.Banque" id="banqueResultMap">
 		<id property='idBanque' column='id_banque' />
 		<result property='cardStart' column='card_start' />
 		<result property='url' column='url' />
@@ -16,7 +16,7 @@
 	
 	<select id="findByCardNumber" resultMap="banqueResultMap" parameterType="String">
 		select * from banque
-		where '#{cardNumber}' like CONCAT(card_start, '%');
+		where #{cardNumber} like CONCAT(card_start, '%');
 	</select>
 
 </mapper>

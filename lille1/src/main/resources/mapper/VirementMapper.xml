@@ -4,7 +4,7 @@
 
 <mapper namespace="fil.tiir.fakedistrib.dao.VirementDao">
 
-	<resultMap type="fil.tiir.fakedistrib.dao.VirementDao" id="virementResultMap">
+	<resultMap type="fil.tiir.fakedistrib.entity.Virement" id="virementResultMap">
 		<id property='idVirement' column='id_virement' />
 		<result property='date' column='date' />
 		<result property='ibanFrom' column='iban_from' />

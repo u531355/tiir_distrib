@@ -29,14 +29,15 @@ public class LoginController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String login(Model model, HttpSession session) {
 		Client client = new Client();
-		model.addAttribute("client",client); //A voir si vraiment nécessaire
+		model.addAttribute("client", client); // A voir si vraiment nécessaire
 		return "login";
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String login(@ModelAttribute("client") Client client, Model model) {
-	
-		client.setHash(HashUtil.SHA1(client.getHash())); //Change le password en un hash 
+
+		client.setHash(HashUtil.SHA1(client.getHash())); // Change le password
+															// en un hash
 		try {
 			interactionBanque.connecter(client);
 		} catch (JSONException e) {
@@ -46,9 +47,9 @@ public class LoginController {
 			model.addAttribute("error", "Erreure de connexion avec le serveur");
 			return "login";
 		}
-		if (client.isConnected()) 
-			return "choices";
-		//Client not connected
+		if (client.isConnected())
+			return "redirect:/choices";
+		// Client not connected
 		model.addAttribute("error", "Vérifier vos identifiants");
 		return "login";
 	}

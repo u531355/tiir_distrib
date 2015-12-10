@@ -1,5 +1,9 @@
 package fil.tiir.fakedistrib.dao;
 
-public interface RetraitDao {
+import java.util.List;
 
+import fil.tiir.fakedistrib.entity.Retrait;
+
+public interface RetraitDao {
+	List<Retrait> getAll();
 }

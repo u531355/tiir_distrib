@@ -4,7 +4,7 @@
 
 <mapper namespace="fil.tiir.fakedistrib.dao.RetraitDao">
 
-	<resultMap type="fil.tiir.fakedistrib.dao.RetraitDao" id="retraitResultMap">
+	<resultMap type="fil.tiir.fakedistrib.entity.Retrait" id="retraitResultMap">
 		<id property='idRetrait' column='id_retrait' />
 		<result property='date' column='date' />
 		<result property='ibanFrom' column='iban_from' />

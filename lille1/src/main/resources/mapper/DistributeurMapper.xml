@@ -4,7 +4,7 @@
 
 <mapper namespace="fil.tiir.fakedistrib.dao.DistributeurDao">
 
-	<resultMap type="fil.tiir.fakedistrib.dao.DistributeurDao" id="distributeurResultMap">
+	<resultMap type="fil.tiir.fakedistrib.entity.Distributeur" id="distributeurResultMap">
 		<id property='idDistributeur' column='id_distributeur' />
 		<result property='montant' column='montant' />
 	</resultMap>
