@@ -1,6 +1,7 @@
 package fil.tiir.fakedistrib.service;
 
 import fil.tiir.fakedistrib.entity.Client;
+import fil.tiir.fakedistrib.entity.Retrait;
 import fil.tiir.fakedistrib.entity.Virement;
 import fil.tiir.fakedistrib.exception.InteractionBanqueException;
 
@@ -11,7 +12,7 @@ public interface InteractionBanque {
 
 	String afficherSolde(Client client) throws InteractionBanqueException;
 
-	void retrait(Client client, Virement virement) throws InteractionBanqueException;
+	void retrait(Client client, Retrait retrait) throws InteractionBanqueException;
 
 	void virement(Client client, Virement virement) throws InteractionBanqueException;
 	

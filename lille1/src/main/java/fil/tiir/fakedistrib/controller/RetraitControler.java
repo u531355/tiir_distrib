@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fil.tiir.fakedistrib.entity.Client;
 import fil.tiir.fakedistrib.entity.Retrait;
+import fil.tiir.fakedistrib.exception.InteractionBanqueException;
 import fil.tiir.fakedistrib.service.InteractionBanque;
 
 /**
@@ -36,6 +37,13 @@ public class RetraitControler {
 		Client client = (Client) session.getAttribute("client");
 		if (client == null)
 			return "redirect:/";
+		
+		try {
+			interactionBanque.retrait(client, retrait);;
+		} catch (InteractionBanqueException e) {
+			model.addAttribute("error", e.getMessage());
+		}
+		
 		return "retrait";
 	}
 }
