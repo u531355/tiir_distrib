@@ -26,7 +26,7 @@ public class Distributeur {
 		return this.montant;
 	}
 
-	public void diminuerMontant(double montant) {
+	public void diminuerMontant(int montant) {
 		this.montant -= montant;
 	}
 
