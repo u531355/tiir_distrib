@@ -15,8 +15,9 @@
 	<select id="getAll" resultMap="retraitResultMap">
 		select * from retrait;
 	</select>
-	
-	<insert id="insert" parameterMap="retraitResultMap">
+
+	<insert id="insert" parameterMap="retraitResultMap"
+		useGeneratedKeys="true" keyProperty="r.idRetrait" keyColumn="id_retrait">
 		insert into retrait (date, iban_from, montant) values
 		(#{r.getDate()},#{r.getIbanFrom()},#{r.getMontant()})
 	</insert>
