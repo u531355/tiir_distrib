@@ -41,7 +41,7 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		client.setConnected(false);
 		request.append("card_number", client.getNumeroCarte().substring(END_ID_BANQUE));
 		request.append("hashed_pin", client.getHash());
-		String response = sendRequest(request, b.getUrl() + "/token");
+		String response = sendRequest(request, b.getUrl() + "/token", null);
 		
 		if (response == null) 
 			return;
@@ -62,25 +62,56 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	}
 
 	@Override
-	public String afficherSolde(Client client) {
-		return "";
+	public String afficherSolde(Client client) throws JSONException, IOException{
+		JSONObject request = new JSONObject();
+		String response = sendRequest(request, client.getBank().getUrl() + "/account/"+client.getIdAccount() + "/balance", client.getToken());
+		
+		if (response == null) 
+			return null;
+		
+		JSONObject jResponse = new JSONObject(response);
+		String balance = jResponse.getString("balance");
+		if (balance == null)
+			return null;
+		return balance;
 	}
 
 	@Override
-	public boolean retrait(Client client, double montant) {
+	public boolean retrait(Client client, double montant) throws JSONException, IOException{
+		JSONObject request = new JSONObject();
+		
+		client.setConnected(false);
+		request.append("amount", montant);
+		String response = sendRequest(request, client.getBank().getUrl() + "/account/"+client.getIdAccount()+"/debit", client.getToken());
+		
+		if (response == null) 
+			return false;
+		
 		return true;
 	}
 
 	@Override
-	public boolean virement(Client client, double montant, String ibanTo) {
+	public boolean virement(Client client, double montant, String ibanTo) throws JSONException, IOException{
+		JSONObject request = new JSONObject();
+		
+		client.setConnected(false);
+		request.append("amount", montant);
+		request.append("recipient", ibanTo);
+		String response = sendRequest(request, client.getBank().getUrl() + "/account/"+client.getIdAccount()+"/transfert", client.getToken());
+		
+		if (response == null) 
+			return false;
+		
 		return true;
 	}
 
-	public static String sendRequest(JSONObject toSend, String url) throws IOException {
+	public static String sendRequest(JSONObject toSend, String url, String token) throws IOException {
 		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost(url);
 		StringEntity params = new StringEntity(toSend.toString());
 		request.addHeader("content-type", "application/json");
+		if (token != null || !token.equals(""))
+			request.addHeader("Token", token);
 		request.setEntity(params);
 		HttpResponse response = httpClient.execute(request);
 		httpClient.close();

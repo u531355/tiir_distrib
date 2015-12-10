@@ -19,7 +19,7 @@ public interface InteractionBanque {
 	 * @param client
 	 * @return
 	 */
-	String afficherSolde(Client client);
+	String afficherSolde(Client client) throws JSONException, IOException;
 
 	/**
 	 * retire the sum of the client's account, look if the distributor has
@@ -29,7 +29,7 @@ public interface InteractionBanque {
 	 * @param montant
 	 * @return
 	 */
-	boolean retrait(Client client, double montant);
+	boolean retrait(Client client, double montant) throws JSONException, IOException;
 
 	/**
 	 * transfer montant euro from the client to the IbanTo Account
@@ -39,6 +39,6 @@ public interface InteractionBanque {
 	 * @param ibanTo
 	 * @return
 	 */
-	boolean virement(Client client, double montant, String ibanTo);
+	boolean virement(Client client, double montant, String ibanTo) throws JSONException, IOException;
 
 }
