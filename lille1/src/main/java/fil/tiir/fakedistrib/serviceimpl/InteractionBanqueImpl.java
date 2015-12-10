@@ -32,6 +32,8 @@ public class InteractionBanqueImpl implements InteractionBanque {
 
 	@Override
 	public void creerCompte(Client client) throws InteractionBanqueException {
+		// TODO il n'y a rien à envoyer dans la requête, juste une réponse à
+		// afficher, donc pas besoin de formulaire dans le .html etc ...
 		Banque b = banqueDao.findByCardNumber(client.getNumeroCarte());
 		if (b == null)
 			throw new InteractionBanqueException("Cette banque n'existe pas.");
@@ -46,12 +48,14 @@ public class InteractionBanqueImpl implements InteractionBanque {
 
 		String response;
 		try {
-			response = RequestUtil.sendRequest(request, b, "token");
+			response = RequestUtil.sendRequest(request, b, "account");
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		}
+		System.out.println(response);
 	}
 
+	@Override
 	public void connecter(Client client) throws InteractionBanqueException {
 		Banque b = banqueDao.findByCardNumber(client.getNumeroCarte());
 		if (b == null)
