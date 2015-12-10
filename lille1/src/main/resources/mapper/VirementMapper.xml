@@ -16,5 +16,10 @@
 	<select id="getAll" resultMap="virementResultMap">
 		select * from virement;
 	</select>
+	
+		<insert id="insert" parameterMap="virementResultMap">
+		insert into retrait (date, iban_from, iban_to, montant) values
+		(#{r.getDate()},#{r.getIbanFrom()},#{r.getIbanTo()},#{r.getMontant()})
+	</insert>
 
 </mapper>
