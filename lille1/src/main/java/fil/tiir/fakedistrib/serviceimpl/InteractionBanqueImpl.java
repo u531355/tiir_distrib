@@ -15,6 +15,7 @@ import fil.tiir.fakedistrib.dao.RetraitDao;
 import fil.tiir.fakedistrib.dao.VirementDao;
 import fil.tiir.fakedistrib.entity.Banque;
 import fil.tiir.fakedistrib.entity.Client;
+import fil.tiir.fakedistrib.entity.Virement;
 import fil.tiir.fakedistrib.exception.InteractionBanqueException;
 import fil.tiir.fakedistrib.service.InteractionBanque;
 import fil.tiir.fakedistrib.util.RequestUtil;
@@ -112,10 +113,10 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	}
 
 	@Override
-	public void retrait(Client client, double montant) throws InteractionBanqueException {
+	public void retrait(Client client, Virement virement) throws InteractionBanqueException {
 		JSONObject request = new JSONObject();
 		try {
-			request.append("amount", montant);
+			request.append("amount", virement.getMontant());
 		} catch (JSONException e1) {
 			throw new InternalError();
 		}
@@ -129,12 +130,12 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	}
 
 	@Override
-	public void virement(Client client, double montant, String ibanTo) throws InteractionBanqueException {
+	public void virement(Client client, Virement virement) throws InteractionBanqueException {
 		JSONObject request = new JSONObject();
 
 		try {
-			request.append("amount", montant);
-			request.append("recipient", ibanTo);
+			request.append("amount", virement.getMontant());
+			request.append("recipient", virement.getIbanTo());
 		} catch (JSONException e) {
 			throw new InternalError();
 		}

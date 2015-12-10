@@ -30,6 +30,7 @@ public class VirementControler {
 		Client client = (Client) session.getAttribute("client");
 		if (client == null)
 			return "redirect:/";
+		model.addAttribute("virement", new Virement());
 		return "virement";
 	}
 
@@ -44,7 +45,7 @@ public class VirementControler {
 			return "redirect:/";
 	
 		try {
-			interactionBanque.virement(client, virement.getMontant(), virement.getIbanTo());
+			interactionBanque.virement(client, virement);
 		} catch (InteractionBanqueException e) {
 			model.addAttribute("error", e.getMessage());
 		}

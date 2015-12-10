@@ -28,7 +28,7 @@ public class Virement {
 		this.montant = montant;
 	}
 
-	protected Virement() {
+	public Virement() {
 	}
 
 	public Integer getIdVirement() {
@@ -53,6 +53,26 @@ public class Virement {
 
 	public int getMontant() {
 		return this.montant;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public void setIbanFrom(String ibanFrom) {
+		this.ibanFrom = ibanFrom;
+	}
+
+	public void setIbanTo(String ibanTo) {
+		this.ibanTo = ibanTo;
+	}
+
+	public void setBanque(Banque banque) {
+		this.banque = banque;
+	}
+
+	public void setMontant(int montant) {
+		this.montant = montant;
 	}
 
 }
