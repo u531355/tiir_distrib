@@ -12,14 +12,13 @@ import fil.tiir.fakedistrib.entity.Client;
 import fil.tiir.fakedistrib.service.InteractionBanque;
 
 /**
- * Controller for the "choices a user can make when logged in" function of the
- * ATM TODO
+ * Controller for the "choices a user can make when logged in" function of the ATM
  */
 @Controller
 public class ChoicesController {
 
-	@Autowired
-	private InteractionBanque interactionBanque;
+//	@Autowired
+//	private InteractionBanque interactionBanque;
 
 	@RequestMapping(value = "/choices", method = RequestMethod.GET)
 	public String choices(Model model, HttpSession session) {

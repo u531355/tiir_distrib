@@ -13,8 +13,7 @@ import fil.tiir.fakedistrib.exception.InteractionBanqueException;
 import fil.tiir.fakedistrib.service.InteractionBanque;
 
 /**
- * Controller for the balance function of the ATM TODO : Make it work ! Like
- * other controllers..
+ * Controller for the balance function of the ATM
  */
 @Controller
 public class BalanceController {

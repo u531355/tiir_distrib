@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import fil.tiir.fakedistrib.entity.Client;
 import fil.tiir.fakedistrib.entity.Virement;
@@ -16,8 +15,7 @@ import fil.tiir.fakedistrib.exception.InteractionBanqueException;
 import fil.tiir.fakedistrib.service.InteractionBanque;
 
 /**
- * Controller for the money transfer function of the ATM TODO : Make it work !
- * Like other controllers..
+ * Controller for the money transfer function of the ATM
  */
 @Controller
 public class VirementControler {

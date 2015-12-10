@@ -15,8 +15,7 @@ import fil.tiir.fakedistrib.service.InteractionBanque;
 import fil.tiir.fakedistrib.util.HashUtil;
 
 /**
- * Controller for the money transfert function of the ATM TODO : Make it work !
- * Like other controllers..
+ * Controller for the money transfert function of the ATM
  */
 @Controller
 public class LoginController {
