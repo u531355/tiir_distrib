@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Distributor - Ze login page</title>
-    </head>
-    <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form action="#" th:action="@{/}" th:object="${client}" method="post">
-            <div><label> User card number : <input type="text" th:field="*{numeroCarte}" /> </label></div>
-            <div><label> Password: <input type="password" th:field="*{hash}" /> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Distributor - Ze login page</title>
+</head>
+<body>
+	<div>
+		<p th:if="${error}" th:text="${error}" />
+		<form th:action="@{/}" th:object="${client}" method="post">
+			<div>
+				<label> User card number : <input type="text"
+					th:field="*{numeroCarte}" />
+				</label>
+			</div>
+			<div>
+				<label> Password: <input type="password" th:field="*{hash}" />
+				</label>
+			</div>
+			<div>
+				<input type="submit" value="Sign In" />
+			</div>
+		</form>
+	</div>
+	<div>
+		<p><a th:href="@{/creation}">Create an account</a></p>
+	</div>
+</body>
 </html>

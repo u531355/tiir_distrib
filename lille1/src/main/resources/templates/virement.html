@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Distributor - Ze transfer page</title>
+    </head>
+    <body>
+    	<h1>Money transfer :</h1>
+     	<p> </p>
+        <form th:action="@{/virement}" method="post">
+            <div><label>Enter the account to transfer money from :<input type="text" name="accountfrom"/> </label></div>
+            <div><label>Enter the account to transfer money to :<input type="text" name="accountto"/> </label></div>
+            <div><label>Amount to tranfer : :<input type="number" name="amount"/> </label></div>
+            <div><input type="submit" value="Transfer money"/></div>
+        </form>
+    </body>
+</html>

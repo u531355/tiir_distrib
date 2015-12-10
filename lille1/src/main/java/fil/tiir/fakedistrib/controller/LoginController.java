@@ -29,6 +29,7 @@ public class LoginController {
 		Client client = (Client) session.getAttribute("client");
 		if (client != null)
 			return "redirect:/choices";
+		model.addAttribute("client", new Client());
 		return "login";
 	}
 

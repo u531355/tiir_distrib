@@ -14,7 +14,7 @@ import fil.tiir.fakedistrib.entity.Retrait;
 import fil.tiir.fakedistrib.service.InteractionBanque;
 
 /**
- * Controller for the money transfert function of the ATM TODO : Make it work !
+ * Controller for the money withdrawal function of the ATM TODO : Make it work !
  * Like other controllers..
  */
 @Controller
@@ -23,7 +23,7 @@ public class RetraitControler {
 	@Autowired
 	private InteractionBanque interactionBanque;
 
-	@RequestMapping(value = "/transfert", method = RequestMethod.GET)
+	@RequestMapping(value = "/retrait", method = RequestMethod.GET)
 	public String retrait(Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");
 		if (client == null)
@@ -31,7 +31,7 @@ public class RetraitControler {
 		return "retrait";
 	}
 
-	@RequestMapping(value = "/transfert", method = RequestMethod.POST)
+	@RequestMapping(value = "/retrait", method = RequestMethod.POST)
 	public String retrait(@ModelAttribute("retrait") Retrait retrait, Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");
 		if (client == null)

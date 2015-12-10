@@ -11,14 +11,16 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
+import fil.tiir.fakedistrib.entity.Banque;
+
 public class RequestUtil {
-	public static String sendRequest(JSONObject toSend, String url) throws IOException {
-		return sendRequest(toSend, url, null);
+	public static String sendRequest(JSONObject toSend, Banque banque, String url) throws IOException {
+		return sendRequest(toSend, banque, url, null);
 	}
 
-	public static String sendRequest(JSONObject toSend, String url, String token) throws IOException {
+	public static String sendRequest(JSONObject toSend, Banque banque, String url, String token) throws IOException {
 		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-		HttpPost request = new HttpPost(url);
+		HttpPost request = new HttpPost("http://" + banque.getUrl() + "/" + url);
 		StringEntity params = new StringEntity(toSend.toString());
 		request.addHeader("content-type", "application/json");
 		if (token != null)

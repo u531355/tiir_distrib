@@ -14,7 +14,7 @@ import fil.tiir.fakedistrib.entity.Virement;
 import fil.tiir.fakedistrib.service.InteractionBanque;
 
 /**
- * Controller for the money transfert function of the ATM TODO : Make it work !
+ * Controller for the money transfer function of the ATM TODO : Make it work !
  * Like other controllers..
  */
 @Controller

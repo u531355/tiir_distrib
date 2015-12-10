@@ -7,9 +7,9 @@
 <body>
     <h1>Your choices :</h1>
 	
-	<p>Click <a th:href="@{/retrait}">here</a> to withdraw money.</p>
-	<p>Click <a th:href="@{/virement}">here</a> to transfert money.</p>
-	<p>Click <a th:href="@{/balance}">here</a> to check your balance.</p>
+	<p><a th:href="@{/balance}">Check my balance</a></p>
+	<p><a th:href="@{/retrait}">Withdraw money</a></p>
+	<p><a th:href="@{/virement}">Transfer money</a></p>
 	
 	<form th:action="@{/logout}" method="post">
 		<input type="submit" value="Sign Out"/>
