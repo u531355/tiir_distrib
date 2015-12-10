@@ -25,9 +25,6 @@ public class CreationController {
 
 	@RequestMapping(value = "/creation", method = RequestMethod.GET)
 	public String creation(Model model, HttpSession session) {
-		Client client = (Client) session.getAttribute("client");
-		if (client != null)
-			return "redirect:/choices";
 		model.addAttribute("client", new Client());
 		return "creation";
 	}
@@ -40,7 +37,6 @@ public class CreationController {
 			model.addAttribute("error", e.getMessage());
 			return "creation";
 		}
-		session.setAttribute("client", client);
-		return "redirect:/choices";
+		return "redirect:/";
 	}
 }
