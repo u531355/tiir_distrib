@@ -12,5 +12,12 @@
 	<select id="getAll" resultMap="distributeurResultMap">
 		select * from distributeur;
 	</select>
+	
+	<update id="update" parameterType="fil.tiir.fakedistrib.entity.Distributeur" >
+	  update distributeur set
+     id_distributeur = #{d.getIdDistributeur()},
+     montant = #{montant}
+     where id_distributeur = #{d.getIdDistributeur()} 
+	</update>
 
 </mapper>
