@@ -34,18 +34,17 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	private BanqueDao banqueDao;
 
 	public void connecter(Client client) throws JSONException, IOException {
-		
 		Banque b = banqueDao.findByCardNumber(client.getNumeroCarte());
 		JSONObject request = new JSONObject();
-		
+
 		client.setConnected(false);
 		request.append("card_number", client.getNumeroCarte().substring(END_ID_BANQUE));
 		request.append("hashed_pin", client.getHash());
 		String response = sendRequest(request, b.getUrl() + "/token");
-		
-		if (response == null) 
+
+		if (response == null)
 			return;
-		
+
 		JSONObject jResponse = new JSONObject(response);
 		String token = jResponse.getString("token");
 		String id = jResponse.getString("id_account");
@@ -53,8 +52,8 @@ public class InteractionBanqueImpl implements InteractionBanque {
 
 		if (token == null || id == null || validity == null)
 			return;
-		
-		//Client is legit, I guess => check API
+
+		// Client is legit, I guess => check API
 		client.setToken(token);
 		client.setIdAccount(id);
 		client.setBank(b);

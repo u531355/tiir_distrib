@@ -1,5 +1,9 @@
 package fil.tiir.fakedistrib.dao;
 
-public interface VirementDao {
+import java.util.List;
 
+import fil.tiir.fakedistrib.entity.Virement;
+
+public interface VirementDao {
+	List<Virement> getAll();
 }
