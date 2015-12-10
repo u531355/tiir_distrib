@@ -11,15 +11,15 @@ public class Virement {
 
 	private Date date;
 
-	private Integer ibanFrom;
+	private String ibanFrom;
 
-	private Integer ibanTo;
+	private String ibanTo;
 
 	private Banque banque;
 
 	private double montant;
 
-	public Virement(Integer ibanFrom, Integer ibanTo, Banque banque, double montant) {
+	public Virement(String ibanFrom, String ibanTo, Banque banque, double montant) {
 		this.date = new Date();
 		this.ibanFrom = ibanFrom;
 		this.ibanTo = ibanTo;
@@ -38,11 +38,11 @@ public class Virement {
 		return this.date;
 	}
 
-	public Integer getIbanFrom() {
+	public String getIbanFrom() {
 		return this.ibanFrom;
 	}
 
-	public Integer getIbanTo() {
+	public String getIbanTo() {
 		return this.ibanTo;
 	}
 
