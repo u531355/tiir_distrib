@@ -6,8 +6,10 @@
     </head>
     <body>
     	<h1>Money transfert :</h1>
-     	<p> </p>
-        <form th:action="@{/transfert}" method="post">
+    	     	
+     	<span tf:if="${accountbalance}">Transfert of ${accountbalance} from ${accountfrom} to ${accountto} done. </span>
+     	
+        <form th:action="@{/virement}" method="post">
             <div><label>Enter the account to transfert money from :<input type="text" name="accountfrom"/> </label></div>
             <div><label>Enter the account to transfert money to :<input type="text" name="accountto"/> </label></div>
             <div><label>Amount to tranfert : :<input type="number" name="amount"/> </label></div>
