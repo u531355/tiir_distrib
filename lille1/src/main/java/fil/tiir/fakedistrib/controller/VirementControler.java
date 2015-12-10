@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fil.tiir.fakedistrib.entity.Client;
 import fil.tiir.fakedistrib.entity.Virement;
+import fil.tiir.fakedistrib.exception.InteractionBanqueException;
 import fil.tiir.fakedistrib.service.InteractionBanque;
 
 /**
@@ -32,10 +34,29 @@ public class VirementControler {
 	}
 
 	@RequestMapping(value = "/virement", method = RequestMethod.POST)
-	public String virement(@ModelAttribute("virement") Virement virement, Model model, HttpSession session) {
+	public String virement(@ModelAttribute("virement") Virement virement, 
+							Model model, 
+							HttpSession session,
+							@RequestParam("accountfrom") String accountfrom,
+							@RequestParam("accountto") String accountto, 
+							@RequestParam("amount") String amount) {
+								
 		Client client = (Client) session.getAttribute("client");
+		
 		if (client == null)
 			return "redirect:/";
+		
+		if(!client.isConnected()) {
+			try {
+				model.addAttribute("accountbalance", interactionBanque.afficherSolde(client));
+				model.addAttribute("accountfrom", accountfrom);
+				model.addAttribute("accountto", accountto);
+			} catch (InteractionBanqueException e) {
+				model.addAttribute("error", e.getMessage());
+				
+			}
+		}
+		
 		return "virement";
 	}
 }
