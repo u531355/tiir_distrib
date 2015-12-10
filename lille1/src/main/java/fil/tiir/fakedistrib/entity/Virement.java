@@ -7,6 +7,7 @@ import java.util.Date;
  * 
  */
 public class Virement {
+
 	private Integer idVirement;
 
 	private Date date;
@@ -17,9 +18,9 @@ public class Virement {
 
 	private Banque banque;
 
-	private double montant;
+	private int montant;
 
-	public Virement(String ibanFrom, String ibanTo, Banque banque, double montant) {
+	public Virement(String ibanFrom, String ibanTo, Banque banque, int montant) {
 		this.date = new Date();
 		this.ibanFrom = ibanFrom;
 		this.ibanTo = ibanTo;
@@ -50,7 +51,7 @@ public class Virement {
 		return this.banque;
 	}
 
-	public double getMontant() {
+	public int getMontant() {
 		return this.montant;
 	}
 

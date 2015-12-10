@@ -31,7 +31,21 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		Banque b = banqueDao.findByCardNumber(client.getNumeroCarte());
 		if (b == null)
 			throw new InteractionBanqueException("Cette banque n'existe pas.");
+		JSONObject request = new JSONObject();
+		try {
+			request.append("id_account", client.getIdAccount());
+			request.append("card_number", client.getNumeroCarteSansStart());
+			request.append("balance", Integer.toString(client.getMontant()));
+		} catch (JSONException e) {
+			throw new InternalError();
+		}
 
+		String response;
+		try {
+			response = RequestUtil.sendRequest(request, b, "token");
+		} catch (IOException e) {
+			throw new InteractionBanqueException("Erreur de communication avec la banque.");
+		}
 	}
 
 	public void connecter(Client client) throws InteractionBanqueException {
@@ -46,13 +60,14 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		} catch (JSONException e) {
 			throw new InternalError();
 		}
+
 		String response;
 		try {
 			response = RequestUtil.sendRequest(request, b, "token");
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		}
-		System.out.println(response);
+
 		String token, id, validity;
 		try {
 			JSONObject jResponse = new JSONObject(response);

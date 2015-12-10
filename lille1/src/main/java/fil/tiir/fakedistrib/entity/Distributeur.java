@@ -8,13 +8,13 @@ public class Distributeur {
 
 	private Integer idDistributeur;
 
-	private double montant;
+	private int montant;
 
 	public Distributeur() {
 
 	}
 
-	public Distributeur(double montant) {
+	public Distributeur(int montant) {
 		this.montant = montant;
 	}
 
@@ -22,7 +22,7 @@ public class Distributeur {
 		return this.idDistributeur;
 	}
 
-	public double getMontant() {
+	public int getMontant() {
 		return this.montant;
 	}
 
