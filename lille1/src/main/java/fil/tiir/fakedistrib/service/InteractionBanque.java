@@ -13,4 +13,6 @@ public interface InteractionBanque {
 	void retrait(Client client, double montant) throws InteractionBanqueException;
 
 	void virement(Client client, double montant, String ibanTo) throws InteractionBanqueException;
+	
+	void suppressionToken(Client client) throws InteractionBanqueException;
 }

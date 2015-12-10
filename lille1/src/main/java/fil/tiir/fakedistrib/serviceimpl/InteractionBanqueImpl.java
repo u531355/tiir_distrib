@@ -1,6 +1,9 @@
 package fil.tiir.fakedistrib.serviceimpl;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -127,6 +130,19 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		}
+	}
+
+	@Override
+	public void suppressionToken(Client client) throws InteractionBanqueException {
+
+		String url = "token/" + client.getToken();
+		
+		try{
+			RequestUtil.sendDeleteRequest(client.getBank(), url);
+		} catch (IOException e) {
+			throw new InteractionBanqueException("Erreur de communication avec la banque.");
+		}
+		
 	}
 
 }
