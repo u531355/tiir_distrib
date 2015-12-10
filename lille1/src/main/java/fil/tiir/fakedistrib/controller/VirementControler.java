@@ -36,25 +36,17 @@ public class VirementControler {
 	@RequestMapping(value = "/virement", method = RequestMethod.POST)
 	public String virement(@ModelAttribute("virement") Virement virement, 
 							Model model, 
-							HttpSession session,
-							@RequestParam("accountfrom") String accountfrom,
-							@RequestParam("accountto") String accountto, 
-							@RequestParam("amount") String amount) {
+							HttpSession session) {
 								
 		Client client = (Client) session.getAttribute("client");
 		
 		if (client == null)
 			return "redirect:/";
-		
-		if(!client.isConnected()) {
-			try {
-				model.addAttribute("accountbalance", interactionBanque.afficherSolde(client));
-				model.addAttribute("accountfrom", accountfrom);
-				model.addAttribute("accountto", accountto);
-			} catch (InteractionBanqueException e) {
-				model.addAttribute("error", e.getMessage());
-				
-			}
+	
+		try {
+			interactionBanque.virement(client, virement.getMontant(), virement.getIbanTo());
+		} catch (InteractionBanqueException e) {
+			model.addAttribute("error", e.getMessage());
 		}
 		
 		return "virement";
