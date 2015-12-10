@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -26,6 +27,16 @@ public class RequestUtil {
 		if (token != null)
 			request.addHeader("Token", token);
 		request.setEntity(params);
+		HttpResponse response = httpClient.execute(request);
+		httpClient.close();
+		HttpEntity entity = response.getEntity();
+		String responseString = EntityUtils.toString(entity, "UTF-8");
+		return responseString;
+	}
+	
+	public static String sendDeleteRequest(Banque banque, String url) throws IOException{
+		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+		HttpDelete request = new HttpDelete("http://" + banque.getUrl() + "/" + url);
 		HttpResponse response = httpClient.execute(request);
 		httpClient.close();
 		HttpEntity entity = response.getEntity();
