@@ -18,6 +18,15 @@ public class Client {
 	private String idAccount;
 	private boolean connected;
 	private Banque bank;
+	private int montant;
+
+	public int getMontant() {
+		return montant;
+	}
+
+	public void setMontant(int montant) {
+		this.montant = montant;
+	}
 
 	public Client() {
 
