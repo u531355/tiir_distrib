@@ -1,6 +1,7 @@
 package fil.tiir.fakedistrib.util;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -37,6 +38,17 @@ public class RequestUtil {
 	public static String sendDeleteRequest(Banque banque, String url) throws IOException{
 		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 		HttpDelete request = new HttpDelete("http://" + banque.getUrl() + "/" + url);
+		HttpResponse response = httpClient.execute(request);
+		httpClient.close();
+		HttpEntity entity = response.getEntity();
+		String responseString = EntityUtils.toString(entity, "UTF-8");
+		return responseString;
+	}
+	
+	public static String sendBasicPostRequest(Banque banque, String url) throws IOException {
+		
+		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost request = new HttpPost("http://" + banque.getUrl() + "/" + url);
 		HttpResponse response = httpClient.execute(request);
 		httpClient.close();
 		HttpEntity entity = response.getEntity();
