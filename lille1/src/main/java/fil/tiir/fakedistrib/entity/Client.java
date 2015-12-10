@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class Client {
 
+	public static final int END_ID_BANQUE = 5;
+
 	private String numeroCarte;
 	private String token;
 	private String hash;
@@ -40,6 +42,10 @@ public class Client {
 
 	public String getNumeroCarte() {
 		return numeroCarte;
+	}
+
+	public String getNumeroCarteSansStart() {
+		return numeroCarte.substring(END_ID_BANQUE);
 	}
 
 	public void setNumeroCarte(String numeroCarte) {

@@ -18,9 +18,6 @@ import fil.tiir.fakedistrib.util.RequestUtil;
 
 @Service
 public class InteractionBanqueImpl implements InteractionBanque {
-	public static final int END_ID_BANQUE = 5;
-	public static final int ID_DISTRIBUTEUR = 42;
-	public static final String LOGIN_URL = "/account";
 
 	@Autowired
 	private BanqueDao banqueDao;
@@ -29,6 +26,14 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	@Autowired
 	private VirementDao virementDao;
 
+	@Override
+	public void creerCompte(Client client) throws InteractionBanqueException {
+		Banque b = banqueDao.findByCardNumber(client.getNumeroCarte());
+		if (b == null)
+			throw new InteractionBanqueException("Cette banque n'existe pas.");
+
+	}
+
 	public void connecter(Client client) throws InteractionBanqueException {
 		Banque b = banqueDao.findByCardNumber(client.getNumeroCarte());
 		if (b == null)
@@ -36,7 +41,7 @@ public class InteractionBanqueImpl implements InteractionBanque {
 
 		JSONObject request = new JSONObject();
 		try {
-			request.append("card_number", client.getNumeroCarte().substring(END_ID_BANQUE));
+			request.append("card_number", client.getNumeroCarteSansStart());
 			request.append("hashed_pin", client.getHash());
 		} catch (JSONException e) {
 			throw new InternalError();
