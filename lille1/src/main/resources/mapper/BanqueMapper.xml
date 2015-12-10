@@ -16,7 +16,7 @@
 	
 	<select id="findByCardNumber" resultMap="banqueResultMap" parameterType="String">
 		select * from banque
-		where card_start like '#{cardNumber}%';
+		where '#{cardNumber}' like CONCAT(card_start, '%');
 	</select>
 
 </mapper>
