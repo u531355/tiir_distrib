@@ -20,7 +20,13 @@ public class BalanceController {
 
 	@Autowired
 	private InteractionBanque interactionBanque;
-
+	/**
+	 * Controller of the balance functionnality, ask the Bank service for the solde functionnality and display it 
+	 * in the balance webpage. if a InteractionBanqueException has been generated, returns a error webpage
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/balance", method = RequestMethod.GET)
 	public String balance(Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");

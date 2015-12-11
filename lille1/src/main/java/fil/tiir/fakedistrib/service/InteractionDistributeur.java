@@ -5,7 +5,7 @@ package fil.tiir.fakedistrib.service;
 
 /**
  * @author blanquart
- *
+ *	Interface of the Distributor Service
  */
 public interface InteractionDistributeur {
 	/**

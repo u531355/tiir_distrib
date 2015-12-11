@@ -5,7 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import fil.tiir.fakedistrib.dao.DistributeurDao;
 import fil.tiir.fakedistrib.entity.Distributeur;
 import fil.tiir.fakedistrib.service.InteractionDistributeur;
-
+/**
+ * A implementation of the distributor service interface
+ * @author blanquart
+ *
+ */
 public class InteractionDistributeurImpl implements InteractionDistributeur {
 	@Autowired
 	private DistributeurDao d;

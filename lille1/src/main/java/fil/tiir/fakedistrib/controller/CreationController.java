@@ -21,13 +21,24 @@ public class CreationController {
 
 	@Autowired
 	private InteractionBanque interactionBanque;
-
+	/**
+	 * if a get request has been given in the webpage /creation, returns the demand at the POST request
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/creation", method = RequestMethod.GET)
 	public String creation(Model model, HttpSession session) {
 		model.addAttribute("client", new Client());
 		return "creation";
 	}
-
+	/**
+	 * ask to create an account at the bank service, if the response is positive, redirect the webpage
+	 * @param client
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "/creation", method = RequestMethod.POST)
 	public String login(@ModelAttribute("client") Client client, Model model, HttpSession session) {
 		try {

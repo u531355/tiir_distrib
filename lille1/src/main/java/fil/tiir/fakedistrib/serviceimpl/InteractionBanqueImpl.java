@@ -20,7 +20,11 @@ import fil.tiir.fakedistrib.entity.Virement;
 import fil.tiir.fakedistrib.exception.InteractionBanqueException;
 import fil.tiir.fakedistrib.service.InteractionBanque;
 import fil.tiir.fakedistrib.util.RequestUtil;
-
+/**
+ * A implementation of the Bank service interface
+ * @author blanquart
+ *
+ */
 @Service
 public class InteractionBanqueImpl implements InteractionBanque {
 
@@ -33,23 +37,13 @@ public class InteractionBanqueImpl implements InteractionBanque {
 
 	@Override
 	public void creerCompte(Client client) throws InteractionBanqueException {
-		// TODO il n'y a rien à envoyer dans la requête, juste une réponse à
-		// afficher, donc pas besoin de formulaire dans le .html etc ...
+		// TODO The function was made, but a problem : how to know what bank we give the request? I assume here the bank was given into the client object
 		Banque b = banqueDao.findByCardNumber(client.getNumeroCarte());
 		if (b == null)
 			throw new InteractionBanqueException("Cette banque n'existe pas.");
-		JSONObject request = new JSONObject();
-		try {
-			request.append("id_account", client.getIdAccount());
-			request.append("card_number", client.getNumeroCarteSansStart());
-			request.append("balance", Integer.toString(client.getMontant()));
-		} catch (JSONException e) {
-			throw new InternalError();
-		}
-
 		String response;
 		try {
-			response = RequestUtil.sendRequest(request, b, "account");
+			response = RequestUtil.sendBasicPostRequest(b, "account");
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		}

@@ -22,7 +22,7 @@ public class RetraitControler {
 
 	@Autowired
 	private InteractionBanque interactionBanque;
-
+	//TODO commentaire
 	@RequestMapping(value = "/retrait", method = RequestMethod.GET)
 	public String retrait(Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");
@@ -30,7 +30,7 @@ public class RetraitControler {
 			return "redirect:/";
 		return "retrait";
 	}
-
+	//TODO commentaire
 	@RequestMapping(value = "/retrait", method = RequestMethod.POST)
 	public String retrait(@ModelAttribute("retrait") Retrait retrait, Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");

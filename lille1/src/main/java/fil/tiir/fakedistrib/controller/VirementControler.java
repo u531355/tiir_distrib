@@ -22,7 +22,7 @@ public class VirementControler {
 
 	@Autowired
 	private InteractionBanque interactionBanque;
-
+	//TODO commentaire
 	@RequestMapping(value = "/virement", method = RequestMethod.GET)
 	public String virement(Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");
@@ -31,7 +31,7 @@ public class VirementControler {
 		model.addAttribute("virement", new Virement());
 		return "virement";
 	}
-
+	//TODO commentaire
 	@RequestMapping(value = "/virement", method = RequestMethod.POST)
 	public String virement(@ModelAttribute("virement") Virement virement, 
 							Model model, 

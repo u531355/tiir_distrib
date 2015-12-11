@@ -17,7 +17,7 @@ public class LogoutController {
 
 	@Autowired
 	private InteractionBanque interactionBanque;
-	
+	//TODO Commentaire
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(Model model, HttpSession session) {
 		

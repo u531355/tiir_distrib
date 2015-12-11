@@ -5,6 +5,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class HashUtil {
+	/**
+	 * Convert a byte array into a String
+	 * @param data
+	 * @return
+	 */
 	private static String convertToHex(byte[] data) {
 		StringBuffer buf = new StringBuffer();
 		for (int i = 0; i < data.length; i++) {
@@ -20,7 +25,11 @@ public class HashUtil {
 		}
 		return buf.toString();
 	}
-
+	/**
+	 * take in parameter a Text unhashed and returns a SHA-1 Hash
+	 * @param text
+	 * @return
+	 */
 	public static String SHA1(String text) {
 		MessageDigest md;
 		try {

@@ -19,7 +19,7 @@ public class ChoicesController {
 
 //	@Autowired
 //	private InteractionBanque interactionBanque;
-
+	//TODO commentaire
 	@RequestMapping(value = "/choices", method = RequestMethod.GET)
 	public String choices(Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");
