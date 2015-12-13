@@ -34,7 +34,7 @@ public class RequestUtil {
 	 * @throws IOException
 	 * @throws JSONException 
 	 */
-	public static String sendRequest(JSONObject toSend, Banque banque, String url) throws IOException, JSONException {
+	public static String sendRequest(String toSend, Banque banque, String url) throws IOException, JSONException {
 		return sendRequest(toSend, banque, url, null);
 	}
 	/**
@@ -47,18 +47,15 @@ public class RequestUtil {
 	 * @throws IOException
 	 * @throws JSONException 
 	 */
-	public static String sendRequest(JSONObject toSend, Banque banque, String url, String token) throws IOException, JSONException {
+	public static String sendRequest(String toSend, Banque banque, String url, String token) throws IOException, JSONException {
 		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 		HttpPost request = new HttpPost("http://" + banque.getUrl() + url);
 		//StringEntity params = new StringEntity(toSend.toString());
 		request.addHeader("content-type", "application/json");
-		List<NameValuePair> params2 = new ArrayList<>();
 	
 		//TODO : Changer car dégeulasse
-		String my = toSend.toString();
-		String test2 = my.replace("[", ""); 
-		test2 = test2.replace("]", "");
-		StringEntity params = new StringEntity(test2);
+		
+		StringEntity params = new StringEntity(toSend);
 
 		
 		if (token != null)

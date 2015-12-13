@@ -68,7 +68,10 @@ public class InteractionBanqueImpl implements InteractionBanque {
 
 		String response;
 		try {
-			response = RequestUtil.sendRequest(request, b, "token");
+			String my = request.toString();
+			String jsonToString = my.replace("[", ""); 
+			jsonToString = jsonToString.replace("]", "");
+			response = RequestUtil.sendRequest(jsonToString, b, "token");
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
@@ -104,19 +107,20 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		String url = "account/" + client.getIdAccount() + "/balance";
 		String response;
 		try {
-			response = RequestUtil.sendRequest(request, client.getBank(), url, client.getToken());
+			response = RequestUtil.sendRequest("", client.getBank(), url, client.getToken());
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		} catch (JSONException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 			
 		}
-
+		
 		String balance;
 		try {
 			JSONObject jResponse = new JSONObject(response);
 			balance = jResponse.getString("balance");
 		} catch (JSONException e) {
+			e.printStackTrace();
 			throw new InteractionBanqueException("La banque a montré un comportement inatendu.");
 		}
 		return balance;
@@ -133,7 +137,10 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		String url = "account/" + client.getIdAccount() + "/debit";
 		String response;
 		try {
-			response = RequestUtil.sendRequest(request, client.getBank(), url, client.getToken());
+			String my = request.toString();
+			String jsonToString = my.replace("[", ""); 
+			jsonToString = jsonToString.replace("]", "");
+			response = RequestUtil.sendRequest(jsonToString, client.getBank(), url, client.getToken());
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		} catch (JSONException e) {
@@ -155,7 +162,10 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		String url = "account/" + client.getIdAccount() + "/transfert";
 		String response;
 		try {
-			response = RequestUtil.sendRequest(request, client.getBank(), url, client.getToken());
+			String my = request.toString();
+			String jsonToString = my.replace("[", ""); 
+			jsonToString = jsonToString.replace("]", "");
+			response = RequestUtil.sendRequest(jsonToString, client.getBank(), url, client.getToken());
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		} catch (JSONException e) {
@@ -189,7 +199,7 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		String url = "account/" + client.getIdAccount() + "/deposit";
 		String response;
 		try {
-			response = RequestUtil.sendRequest(request, client.getBank(), url, client.getToken());
+			response = RequestUtil.sendRequest("", client.getBank(), url, client.getToken());
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		} catch (JSONException e) {
