@@ -4,8 +4,7 @@
 
 <mapper namespace="fil.tiir.fakedistrib.dao.DistributeurDao">
 
-	<resultMap type="fil.tiir.fakedistrib.entity.Distributeur"
-		id="distributeurResultMap">
+	<resultMap type="fil.tiir.fakedistrib.entity.Distributeur" id="distributeurResultMap">
 		<id property='idDistributeur' column='id_distributeur' />
 		<result property='montant' column='montant' />
 	</resultMap>
@@ -13,12 +12,12 @@
 	<select id="getAll" resultMap="distributeurResultMap">
 		select * from distributeur;
 	</select>
-
-	<update id="update" parameterMap="distributeurResultMap">
+<!---
+	<update id="update" parameterType="Distributeur">
 		update distributeur set
 			id_distributeur = #{d.getIdDistributeur()},
 			montant = #{d.getMontant()}
 		where id_distributeur = #{d.getIdDistributeur()}
-	</update>
+	</update>-->
 
 </mapper>

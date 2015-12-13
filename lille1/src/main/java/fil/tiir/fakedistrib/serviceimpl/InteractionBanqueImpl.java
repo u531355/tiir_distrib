@@ -57,8 +57,10 @@ public class InteractionBanqueImpl implements InteractionBanque {
 			throw new InteractionBanqueException("Cette banque n'existe pas.");
 
 		JSONObject request = new JSONObject();
+		
+
 		try {
-			request.append("card_number", client.getNumeroCarteSansStart());
+			request.append("card_number", Integer.parseInt(client.getNumeroCarte()));
 			request.append("hashed_pin", client.getHash());
 		} catch (JSONException e) {
 			throw new InternalError();
@@ -68,20 +70,26 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		try {
 			response = RequestUtil.sendRequest(request, b, "token");
 		} catch (IOException e) {
+			e.printStackTrace();
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
+		} catch (JSONException e) {
+			e.printStackTrace();
+			throw new InteractionBanqueException("Erreur de paramètres.");
+			
 		}
-
-		String token, id, validity;
+		System.out.println(response.toString());
+		String token, id; 
+		long validity;
 		try {
 			JSONObject jResponse = new JSONObject(response);
 			token = jResponse.getString("token");
 			id = jResponse.getString("id_account");
-			validity = (String) jResponse.get("end_of_validity");
+			validity = (long) jResponse.get("end_of_validity");
 		} catch (JSONException e) {
 			e.printStackTrace();
 			throw new InteractionBanqueException("La banque a montré un comportement inatendu.");
 		}
-		if (token == null || id.equals("0") || validity == null)
+		if (token == null || id.equals("0") )
 			throw new InteractionBanqueException("Numéro de carte ou mot de passe incorrect.");
 
 		// Client is legit
@@ -99,6 +107,9 @@ public class InteractionBanqueImpl implements InteractionBanque {
 			response = RequestUtil.sendRequest(request, client.getBank(), url, client.getToken());
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
+		} catch (JSONException e) {
+			throw new InteractionBanqueException("Erreur de communication avec la banque.");
+			
 		}
 
 		String balance;
@@ -125,6 +136,9 @@ public class InteractionBanqueImpl implements InteractionBanque {
 			response = RequestUtil.sendRequest(request, client.getBank(), url, client.getToken());
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
+		} catch (JSONException e) {
+			throw new InteractionBanqueException("Erreur de communication avec la banque.");
+			
 		}
 	}
 
@@ -144,6 +158,9 @@ public class InteractionBanqueImpl implements InteractionBanque {
 			response = RequestUtil.sendRequest(request, client.getBank(), url, client.getToken());
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
+		} catch (JSONException e) {
+			throw new InteractionBanqueException("Erreur de communication avec la banque.");
+			
 		}
 	}
 

@@ -16,11 +16,11 @@
 	<select id="getAll" resultMap="virementResultMap">
 		select * from virement;
 	</select>
-
-	<insert id="insert" parameterMap="virementResultMap"
+	<!---
+	<insert id="insert" parameterType="Virement"
 		useGeneratedKeys="true" keyProperty="v.idVirement" keyColumn="id_virement">
 		insert into retrait (date, iban_from, iban_to, montant) values
 		(#{v.getDate()},#{v.getIbanFrom()},#{v.getIbanTo()},#{v.getMontant()})
-	</insert>
+	</insert>-->
 
 </mapper>

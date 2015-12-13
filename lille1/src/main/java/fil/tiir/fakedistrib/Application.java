@@ -9,12 +9,13 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @SpringBootApplication
 @MapperScan(value = "fil.tiir.fakedistrib.dao")
 public class Application {
-
+	
 	@Bean
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 		final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
@@ -27,9 +28,9 @@ public class Application {
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource ds = new BasicDataSource();
-		ds.setUsername("distrib");
-		ds.setPassword("42");
-		ds.setUrl("jdbc:postgresql://pcmt10:5432/distrib");
+		ds.setUsername("postgres");
+		ds.setPassword("coolbaby");
+		ds.setUrl("jdbc:postgresql://127.0.0.1:5432/distrib");
 		ds.setDriverClassName("org.postgresql.Driver");
 		ds.setMaxWait(25);
 		return ds;
