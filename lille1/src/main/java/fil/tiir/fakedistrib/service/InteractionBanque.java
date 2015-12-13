@@ -52,4 +52,7 @@ public interface InteractionBanque {
 	 * @throws InteractionBanqueException
 	 */
 	void suppressionToken(Client client) throws InteractionBanqueException;
+	
+	
+	void depot(Client client, int amount) throws InteractionBanqueException;
 }
