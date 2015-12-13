@@ -192,6 +192,8 @@ public class InteractionBanqueImpl implements InteractionBanque {
 			response = RequestUtil.sendRequest(request, client.getBank(), url, client.getToken());
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
+		} catch (JSONException e) {
+			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		}
 		
 	}
