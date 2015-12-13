@@ -203,7 +203,10 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		String url = "account/" + client.getIdAccount() + "/deposit";
 		String response;
 		try {
-			response = RequestUtil.sendRequest("", client.getBank(), url, client.getToken());
+			String my = request.toString();
+			String jsonToString = my.replace("[", ""); 
+			jsonToString = jsonToString.replace("]", "");
+			response = RequestUtil.sendRequest(jsonToString, client.getBank(), url, client.getToken());
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		} catch (JSONException e) {
