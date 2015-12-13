@@ -15,10 +15,12 @@
     	<h1>Money transfer :</h1>
      	<p> </p>
         <form th:action="@{/virement}" method="post">
-            <p><label>Enter the account to transfer money from :</label><input type="text" name="accountfrom"/></p>
-            <p><label>Enter the account to transfer money to :</label><input type="text" name="accountto"/></p>
-            <p><label>Amount to tranfer :</label><input type="number" name="amount"/></p>
+            <p><label>Enter the account to transfer money from :</label><input type="text" name="ibanFrom"/></p>
+            <p><label>Enter the account to transfer money to :</label><input type="text" name="ibanTo"/></p>
+            <p><label>Amount to tranfer :</label><input type="number" name="montant"/></p>
             <p><input type="submit" value="Transfer money"/></p>
+            
+
         </form>
     </body>
 </html>

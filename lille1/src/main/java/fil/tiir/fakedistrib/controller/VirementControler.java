@@ -25,10 +25,10 @@ public class VirementControler {
 	//TODO commentaire
 	@RequestMapping(value = "/virement", method = RequestMethod.GET)
 	public String virement(Model model, HttpSession session) {
+		
 		Client client = (Client) session.getAttribute("client");
 		if (client == null)
 			return "redirect:/";
-		model.addAttribute("virement", new Virement());
 		return "virement";
 	}
 	//TODO commentaire
@@ -36,7 +36,7 @@ public class VirementControler {
 	public String virement(@ModelAttribute("virement") Virement virement, 
 							Model model, 
 							HttpSession session) {
-								
+		//TODO : Check retrait
 		Client client = (Client) session.getAttribute("client");
 		
 		if (client == null)
