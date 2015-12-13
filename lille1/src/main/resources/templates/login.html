@@ -3,15 +3,29 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<title>Distributor - Ze login page</title>
+	<!-- Bootstrap stuff -->
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link th:href="@{../css/bootstrap.min.css}" rel="stylesheet" />
+	<link th:href="@{../css/signin.css}" rel="stylesheet" />
+	
+	<title>Distributor - Ze login page</title>
 </head>
 <body>
 	<div>
 		<p th:if="${error}" th:text="${error}" />
-		<form th:action="@{/}" th:object="${client}" method="post">
-			<p><label>User card number :</label><input type="text" th:field="*{numeroCarte}" /></p>
-			<p><label>Password:</label><input type="password" th:field="*{hash}" /></p>
-			<p><input type="submit" value="Sign In" /></p>
+		
+		<form th:action="@{/}" th:object="${client}" method="post" class="form-signin">
+			<h2 class="form-signin-heading">Please sign in</h2>
+
+			<label for="usercard">User card number :</label>
+			<input type="text" th:field="*{numeroCarte}" id="usercard" class="form-control"/>
+
+			<label for="password">Password:</label>
+			<input type="password" th:field="*{hash}" class="form-control" id="password"/>
+
+			<button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
 		</form>
 	</div>
 	<div>
