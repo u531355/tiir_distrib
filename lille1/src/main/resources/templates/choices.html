@@ -1,19 +1,26 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Distributor - Ze choices page</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-    <h1>Your choices :</h1>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html">
+		<meta charset="UTF-8">
+		<!-- Bootstrap stuff -->
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link th:href="@{../css/bootstrap.min.css}" rel="stylesheet" />
 	
-	<p><a th:href="@{/balance}">Check my balance</a></p>
-	<p><a th:href="@{/retrait}">Withdraw money</a></p>
-	<p><a th:href="@{/virement}">Transfer money</a></p>
-	<p><a th:href="@{/depot}">Money Deposit</a></p>
-	
-	<form th:action="@{/logout}" method="post">
-		<input type="submit" value="Sign Out"/>
-    </form>
-</body>
+	    <title>Distributor - Ze choices page</title>
+	    
+	</head>
+	<body>
+	    <h1>Your choices :</h1>
+		
+		<p><a th:href="@{/balance}">Check my balance</a></p>
+		<p><a th:href="@{/retrait}">Withdraw money</a></p>
+		<p><a th:href="@{/virement}">Transfer money</a></p>
+		<p><a th:href="@{/depot}">Money Deposit</a></p>
+		
+		<form th:action="@{/logout}" method="post" class="form-group">
+			<input type="submit" value="Sign Out"/>
+	    </form>
+	</body>
 </html>
