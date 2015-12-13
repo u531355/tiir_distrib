@@ -54,6 +54,7 @@ public class Virement {
 	public int getMontant() {
 		return this.montant;
 	}
+	
 
 	public void setDate(Date date) {
 		this.date = date;

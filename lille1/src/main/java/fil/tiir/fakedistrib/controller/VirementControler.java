@@ -1,5 +1,7 @@
 package fil.tiir.fakedistrib.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +49,8 @@ public class VirementControler {
 			return "redirect:/";
 		virement.setBanque(client.getBank());
 		virement.setIbanFrom(client.getIdAccount());
+		virement.setDate(new Date());
+		
 		try {
 			if(interactionBanque.virement(client, virement)){
 				virementDao.insert(virement);

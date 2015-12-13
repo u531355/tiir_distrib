@@ -19,7 +19,7 @@
 	
 	<insert id="insert" parameterType="fil.tiir.fakedistrib.entity.Virement"
 		useGeneratedKeys="true" >
-		insert into virement (iban_from, iban_to, id_banque, date, montant) values
+		insert into virement (iban_from, iban_to, date, id_banque, montant) values
 		(#{ibanFrom},#{ibanTo},#{date},#{banque.idBanque},#{montant})
 	</insert>
 
