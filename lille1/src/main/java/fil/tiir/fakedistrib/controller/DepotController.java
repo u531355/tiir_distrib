@@ -19,7 +19,7 @@ import fil.tiir.fakedistrib.service.InteractionBanque;
  * Controller for the money deposit function of the ATM
  */
 @Controller
-public class DepotControler {
+public class DepotController {
 
 	@Autowired
 	private InteractionBanque interactionBanque;
@@ -27,9 +27,9 @@ public class DepotControler {
 	/** Processing of a GET request for a money deposit
 	 */
 	@RequestMapping(value = "/depot", method = RequestMethod.GET)
-	public String login(Model model, HttpSession session) {
+	public String depot(Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");
-		if (client != null)
+		if (client == null)
 			return "redirect:/";
 		return "depot";
 	}
@@ -37,7 +37,7 @@ public class DepotControler {
 	/** Processing of a POST request for a money deposit
 	 */
 	@RequestMapping(value = "/depot", method = RequestMethod.POST)
-	public String login(@RequestParam("montant") int amount, 
+	public String depot(@RequestParam("montant") int amount, 
 							Model model, 
 							HttpSession session) {
 		Client client = (Client) session.getAttribute("client");

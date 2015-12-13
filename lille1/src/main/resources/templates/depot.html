@@ -20,7 +20,7 @@
      	-->
         <form th:action="@{/depot}"  method="post">
             <!-- <p><label>Enter the account to deposit money to :</label><input type="text" th:field="*{ibanTo}"/></p> -->
-            <p><label>Amount to transfer :</label><input type="number" th:field="*{montant}"/></p>
+            <p><label>Amount to transfer :</label><input type="number" name="montant"/></p>
             <p><input type="submit" value="Deposit money"/></p>
         </form>
     </body>
