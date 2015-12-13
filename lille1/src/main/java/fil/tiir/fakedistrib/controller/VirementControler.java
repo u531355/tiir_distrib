@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import fil.tiir.fakedistrib.dao.RetraitDao;
+import fil.tiir.fakedistrib.dao.VirementDao;
 import fil.tiir.fakedistrib.entity.Client;
 import fil.tiir.fakedistrib.entity.Virement;
 import fil.tiir.fakedistrib.exception.InteractionBanqueException;
@@ -19,16 +21,18 @@ import fil.tiir.fakedistrib.service.InteractionBanque;
  */
 @Controller
 public class VirementControler {
-
+	
+	@Autowired
+	private VirementDao virementDao;
 	@Autowired
 	private InteractionBanque interactionBanque;
 	//TODO commentaire
 	@RequestMapping(value = "/virement", method = RequestMethod.GET)
 	public String virement(Model model, HttpSession session) {
-		
 		Client client = (Client) session.getAttribute("client");
 		if (client == null)
 			return "redirect:/";
+		model.addAttribute("virement", new Virement());
 		return "virement";
 	}
 	//TODO commentaire
@@ -36,18 +40,21 @@ public class VirementControler {
 	public String virement(@ModelAttribute("virement") Virement virement, 
 							Model model, 
 							HttpSession session) {
-		//TODO : Check retrait
+		
 		Client client = (Client) session.getAttribute("client");
 		
 		if (client == null)
 			return "redirect:/";
-	
+		virement.setBanque(client.getBank());
+		virement.setIbanFrom(client.getIdAccount());
 		try {
-			interactionBanque.virement(client, virement);
+			if(interactionBanque.virement(client, virement)){
+				virementDao.insert(virement);
+			}
 		} catch (InteractionBanqueException e) {
 			model.addAttribute("error", e.getMessage());
 		}
 		
-		return "virement";
+		return "choices";
 	}
 }

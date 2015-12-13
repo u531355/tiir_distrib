@@ -45,7 +45,7 @@ public interface InteractionBanque {
 	 * @param virement
 	 * @throws InteractionBanqueException
 	 */
-	void virement(Client client, Virement virement) throws InteractionBanqueException;
+	boolean virement(Client client, Virement virement) throws InteractionBanqueException;
 	/**
 	 * Remove the Token generated at the bank
 	 * @param client

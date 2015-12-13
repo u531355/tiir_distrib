@@ -30,7 +30,7 @@ public class Retrait {
 		this.ibanFrom = client.getNumeroCarte();
 	}
 
-	protected Retrait() {
+	public Retrait() {
 	}
 
 	public Integer getIdRetrait() {

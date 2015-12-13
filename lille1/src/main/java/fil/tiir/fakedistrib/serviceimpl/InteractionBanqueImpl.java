@@ -151,16 +151,16 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	}
 
 	@Override
-	public void virement(Client client, Virement virement) throws InteractionBanqueException {
+	public boolean virement(Client client, Virement virement) throws InteractionBanqueException {
 		JSONObject request = new JSONObject();
 
 		try {
 			request.append("amount", virement.getMontant());
-			request.append("recipient", virement.getIbanTo());
+			request.append("recipient", Integer.parseInt(virement.getIbanTo()));
 		} catch (JSONException e) {
 			throw new InternalError();
 		}
-		String url = "account/" + client.getIdAccount() + "/transfert";
+		String url = "account/" + client.getIdAccount() + "/transfer";
 		String response;
 		try {
 			String my = request.toString();
@@ -169,10 +169,13 @@ public class InteractionBanqueImpl implements InteractionBanque {
 			response = RequestUtil.sendRequest(jsonToString, client.getBank(), url, client.getToken());
 		} catch (IOException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
+	
 		} catch (JSONException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
+	
 			
 		}
+		return true;
 	}
 
 	@Override

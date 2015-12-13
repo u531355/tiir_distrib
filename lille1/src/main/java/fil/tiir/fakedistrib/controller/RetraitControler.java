@@ -29,10 +29,9 @@ public class RetraitControler {
 	@RequestMapping(value = "/retrait", method = RequestMethod.GET)
 	public String retrait(Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");
-
-		
 		if (client == null)
 			return "redirect:/";
+		model.addAttribute("retrait", new Retrait());
 		return "retrait";
 	}
 	//TODO commentaire

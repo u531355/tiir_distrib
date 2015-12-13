@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fil.tiir.fakedistrib.entity.Client;
 import fil.tiir.fakedistrib.entity.Virement;
@@ -36,21 +37,19 @@ public class DepotControler {
 	/** Processing of a POST request for a money deposit
 	 */
 	@RequestMapping(value = "/depot", method = RequestMethod.POST)
-	public String login(@ModelAttribute("virement") Virement virement, 
+	public String login(@RequestParam("montant") int amount, 
 							Model model, 
 							HttpSession session) {
-					
 		Client client = (Client) session.getAttribute("client");
 		if (client == null)
 			return "redirect:/";
 		
 		try {
-			interactionBanque.depot(client, virement.getMontant());
+			interactionBanque.depot(client, amount);
 		} catch (InteractionBanqueException e) {
 		model.addAttribute("error", e.getMessage());
 		}
-		
-		session.setAttribute("virement", virement);
+	
 		return "depot";
 	}
 }
