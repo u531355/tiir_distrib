@@ -177,4 +177,23 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		
 	}
 
+	@Override
+	public void depot(Client client, int amount) throws InteractionBanqueException {
+		JSONObject request = new JSONObject();
+
+		try {
+			request.append("amount", amount);
+		} catch (JSONException e) {
+			throw new InternalError();
+		}
+		String url = "account/" + client.getIdAccount() + "/deposit";
+		String response;
+		try {
+			response = RequestUtil.sendRequest(request, client.getBank(), url, client.getToken());
+		} catch (IOException e) {
+			throw new InteractionBanqueException("Erreur de communication avec la banque.");
+		}
+		
+	}
+
 }
