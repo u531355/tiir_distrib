@@ -11,10 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
 @MapperScan(value = "fil.tiir.fakedistrib.dao")
-public class Application {
+public class Application extends WebMvcConfigurerAdapter {
 	
 	@Bean
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
@@ -36,6 +38,13 @@ public class Application {
 		return ds;
 	}
 
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	  if (!registry.hasMappingForPattern("/css/**")) {
+	     registry.addResourceHandler("/css/**").addResourceLocations("classpath:/css/");
+	  }
+	}
+	
 	public static void main(String[] args) {
 		
 		SpringApplication.run(Application.class, args);
