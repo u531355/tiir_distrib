@@ -99,6 +99,7 @@ public class InteractionBanqueImpl implements InteractionBanque {
 		client.setToken(token);
 		client.setIdAccount(id);
 		client.setBank(b);
+		client.setConnected(true);
 	}
 
 	@Override
@@ -127,7 +128,7 @@ public class InteractionBanqueImpl implements InteractionBanque {
 	}
 
 	@Override
-	public void retrait(Client client, Retrait retrait) throws InteractionBanqueException {
+	public boolean retrait(Client client, Retrait retrait) throws InteractionBanqueException {
 		JSONObject request = new JSONObject();
 		try {
 			request.append("amount", retrait.getMontant());
@@ -145,8 +146,8 @@ public class InteractionBanqueImpl implements InteractionBanque {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 		} catch (JSONException e) {
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
-			
 		}
+		return true;
 	}
 
 	@Override

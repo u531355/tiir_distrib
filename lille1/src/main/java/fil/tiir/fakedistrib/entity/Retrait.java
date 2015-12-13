@@ -12,17 +12,22 @@ public class Retrait {
 
 	private Date date;
 
-	private Integer ibanFrom;
+	private String ibanFrom;
 
 	private Banque banque;
 
 	private int montant;
 
-	public Retrait(Integer ibanFrom, Banque banque, int montant) {
+	public Retrait(String ibanFrom, Banque banque, int montant) {
 		this.date = new Date();
 		this.ibanFrom = ibanFrom;
 		this.banque = banque;
 		this.montant = montant;
+	}
+	public void update(Client client) {
+		this.date = new Date();
+		this.banque = client.getBank();
+		this.ibanFrom = client.getNumeroCarte();
 	}
 
 	protected Retrait() {
@@ -36,7 +41,7 @@ public class Retrait {
 		return this.date;
 	}
 
-	public Integer getIbanFrom() {
+	public String getIbanFrom() {
 		return this.ibanFrom;
 	}
 
@@ -52,7 +57,7 @@ public class Retrait {
 		this.date = date;
 	}
 
-	public void setIbanFrom(Integer ibanFrom) {
+	public void setIbanFrom(String ibanFrom) {
 		this.ibanFrom = ibanFrom;
 	}
 

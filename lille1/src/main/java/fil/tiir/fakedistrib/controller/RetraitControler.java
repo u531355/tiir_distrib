@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import fil.tiir.fakedistrib.dao.RetraitDao;
 import fil.tiir.fakedistrib.entity.Client;
 import fil.tiir.fakedistrib.entity.Retrait;
 import fil.tiir.fakedistrib.exception.InteractionBanqueException;
@@ -21,11 +22,15 @@ import fil.tiir.fakedistrib.service.InteractionBanque;
 public class RetraitControler {
 
 	@Autowired
+	private RetraitDao retraitDao;
+	@Autowired
 	private InteractionBanque interactionBanque;
 	//TODO commentaire
 	@RequestMapping(value = "/retrait", method = RequestMethod.GET)
 	public String retrait(Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");
+
+		
 		if (client == null)
 			return "redirect:/";
 		return "retrait";
@@ -36,13 +41,16 @@ public class RetraitControler {
 		Client client = (Client) session.getAttribute("client");
 		if (client == null)
 			return "redirect:/";
-		
+		retrait.update(client);
 		try {
-			interactionBanque.retrait(client, retrait);;
+			if(interactionBanque.retrait(client, retrait)){
+				retraitDao.insert(retrait);
+				return "choices";
+			}
 		} catch (InteractionBanqueException e) {
 			model.addAttribute("error", e.getMessage());
 		}
 		
-		return "retrait";
+		return "failure";
 	}
 }

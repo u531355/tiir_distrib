@@ -38,7 +38,7 @@ public interface InteractionBanque {
 	 * @param retrait
 	 * @throws InteractionBanqueException
 	 */
-	void retrait(Client client, Retrait retrait) throws InteractionBanqueException;
+	boolean retrait(Client client, Retrait retrait) throws InteractionBanqueException;
 	/**
 	 * Consume the token and give the sum from the client Account_id at the Virement Account_from
 	 * @param client
