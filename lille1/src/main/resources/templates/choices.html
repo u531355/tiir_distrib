@@ -13,7 +13,7 @@
 	    
 	</head>
 	<body>
-		
+		<p th:if="${error}" th:text="${error}" />
 	    <h1>Your account number is  : <span th:text="${session.client.idAccount}"></span> </h1>	   
 		
 		<p><a th:href="@{/balance}" class="btn btn-block btn-lg btn-info">Check my balance</a></p>

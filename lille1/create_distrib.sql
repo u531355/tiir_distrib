@@ -6,7 +6,7 @@
 
 CREATE TABLE Banque(
    id_banque  SERIAL PRIMARY KEY,
-   iban_start           TEXT      NOT NULL,
+   card_start           TEXT      NOT NULL,
    url            TEXT       NOT NULL
 );
 

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import fil.tiir.fakedistrib.entity.Client;
 import fil.tiir.fakedistrib.exception.InteractionBanqueException;
@@ -17,23 +16,23 @@ public class LogoutController {
 
 	@Autowired
 	private InteractionBanque interactionBanque;
-	//TODO Commentaire
+
 	@RequestMapping(value = "/logout")
 	public String logout(Model model, HttpSession session) {
-		
+
 		Client client = (Client) session.getAttribute("client");
 		if (client == null)
 			return "redirect:/";
 		try {
-			
+
 			interactionBanque.suppressionToken(client);
 			session.removeAttribute("client");
-			
+
 		} catch (InteractionBanqueException e) {
 			model.addAttribute("error", e.getMessage());
 			return "error";
 		}
-		
+
 		return "redirect:/";
 	}
 }

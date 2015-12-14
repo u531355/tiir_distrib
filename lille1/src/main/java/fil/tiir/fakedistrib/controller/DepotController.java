@@ -58,7 +58,7 @@ public class DepotController {
 		try {
 			interactionBanque.depot(client, amount);
 		} catch (InteractionBanqueException e) {
-		model.addAttribute("error", e.getMessage());
+			model.addAttribute("error", e.getMessage());
 		}
 		
 		return "choices";

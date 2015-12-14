@@ -1,7 +1,9 @@
 package fil.tiir.fakedistrib.exception;
+
 /**
- * This exception is generated when an error was produced in the bank service 
- * @author blanquart
+ * This exception is generated when an error was produced in the bank service
+ * 
+ * @author chalet
  *
  */
 @SuppressWarnings("serial")

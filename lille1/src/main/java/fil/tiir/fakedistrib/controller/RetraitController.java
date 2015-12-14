@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import fil.tiir.fakedistrib.dao.RetraitDao;
 import fil.tiir.fakedistrib.entity.Client;
 import fil.tiir.fakedistrib.entity.Retrait;
 import fil.tiir.fakedistrib.exception.InteractionBanqueException;
+import fil.tiir.fakedistrib.exception.InteractionDistributeurException;
 import fil.tiir.fakedistrib.service.InteractionBanque;
 import fil.tiir.fakedistrib.service.InteractionDistributeur;
 
@@ -23,37 +23,32 @@ import fil.tiir.fakedistrib.service.InteractionDistributeur;
 public class RetraitController {
 
 	@Autowired
-	private RetraitDao retraitDao;
-	@Autowired
 	private InteractionBanque interactionBanque;
 	@Autowired
 	private InteractionDistributeur interactionDistributeur;
-	//TODO commentaire
+
 	@RequestMapping(value = "/retrait", method = RequestMethod.GET)
 	public String retrait(Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");
 		if (client == null)
 			return "redirect:/";
-		model.addAttribute("retrait", new Retrait());
+		model.addAttribute("retrait", new Retrait(client));
 		return "retrait";
 	}
-	//TODO commentaire
+
 	@RequestMapping(value = "/retrait", method = RequestMethod.POST)
 	public String retrait(@ModelAttribute("retrait") Retrait retrait, Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");
 		if (client == null)
 			return "redirect:/";
-		retrait.update(client);
 		try {
-			if(interactionDistributeur.isEnoughCash(retrait.getMontant())  && interactionBanque.retrait(client, retrait)){
-				interactionDistributeur.retireCash(retrait.getMontant());
-				retraitDao.insert(retrait);
-				return "choices";
-			}
-		} catch (InteractionBanqueException e) {
+			interactionDistributeur.isEnoughCash(retrait.getMontant());
+			interactionBanque.retrait(client, retrait);
+			interactionDistributeur.retireCash(retrait.getMontant());
+		} catch (InteractionBanqueException | InteractionDistributeurException e) {
 			model.addAttribute("error", e.getMessage());
+			return "retrait";
 		}
-		model.addAttribute("error", "Pas assez de fond ou retrait non autorisé");
-		return "retrait";
+		return "redirect:/choices";
 	}
 }

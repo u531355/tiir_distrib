@@ -13,6 +13,7 @@
 		<title>Distributor - Ze balance page</title>
 	</head>
 	<body>
+		<p th:if="${error}" th:text="${error}" />
 		<p> You have <span th:text="${accountbalance}">[...]</span> on your account.</p>
 	</body>
 </html>

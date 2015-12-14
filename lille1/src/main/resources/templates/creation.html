@@ -17,10 +17,7 @@
 		<div>
 			<p th:if="${error}" th:text="${error}" />
 			<form th:action="@{/creation}" th:object="${client}" method="post">
-				<p><label>IBAN:</label><input type="text" th:field="*{idAccount}" /></p>
-				<p><label>Card number:</label><input type="text" th:field="*{numeroCarte}" /></p>
-				<p><label>Amount (in € cents):</label><input type="text" th:field="*{montant}" /></p>
-				<p><label>Password:</label><input type="password" th:field="*{hash}" /></p>
+				<p><label>Card number start:</label><input type="text" th:field="*{numeroCarte}" /></p>
 				<p><input type="submit" value="Create Account" /></p>
 			</form>
 		</div>

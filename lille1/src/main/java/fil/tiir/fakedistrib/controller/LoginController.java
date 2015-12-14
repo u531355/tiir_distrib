@@ -22,7 +22,7 @@ public class LoginController {
 
 	@Autowired
 	private InteractionBanque interactionBanque;
-	//TODO commentaire
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String login(Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");
@@ -31,7 +31,7 @@ public class LoginController {
 		model.addAttribute("client", new Client());
 		return "login";
 	}
-	//TODO commentaire
+
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String login(@ModelAttribute("client") Client client, Model model, HttpSession session) {
 		// Change le password en hash

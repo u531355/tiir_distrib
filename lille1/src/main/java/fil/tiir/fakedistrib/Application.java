@@ -9,7 +9,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -17,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SpringBootApplication
 @MapperScan(value = "fil.tiir.fakedistrib.dao")
 public class Application extends WebMvcConfigurerAdapter {
-	
+
 	@Bean
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 		final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
@@ -31,7 +30,7 @@ public class Application extends WebMvcConfigurerAdapter {
 	public DataSource dataSource() {
 		BasicDataSource ds = new BasicDataSource();
 		ds.setUsername("postgres");
-		ds.setPassword("coolbaby");
+		ds.setPassword("postgres");
 		ds.setUrl("jdbc:postgresql://127.0.0.1:5432/distrib");
 		ds.setDriverClassName("org.postgresql.Driver");
 		ds.setMaxWait(25);
@@ -40,14 +39,14 @@ public class Application extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-	  if (!registry.hasMappingForPattern("/css/**")) {
-	     registry.addResourceHandler("/css/**").addResourceLocations("classpath:/css/");
-	  }
+		if (!registry.hasMappingForPattern("/css/**")) {
+			registry.addResourceHandler("/css/**").addResourceLocations("classpath:/css/");
+		}
 	}
-	
+
 	public static void main(String[] args) {
-		
+
 		SpringApplication.run(Application.class, args);
-		
+
 	}
 }

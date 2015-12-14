@@ -16,7 +16,7 @@
 	
 	<select id="findByCardNumber" resultMap="banqueResultMap" parameterType="String">
 		select * from banque
-		where iban_start = SUBSTRING(#{cardNumber}, 1, 1);
+		where card_start = SUBSTRING(#{cardNumber}, 1, 1);
 	</select>
 
 </mapper>
