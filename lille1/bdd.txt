@@ -1,23 +1,23 @@
-	Distributeur
+	distributeur
 PK	id_distributeur
 	montant
 
-	Banque
+	banque
 PK	id_banque
-	iban_start
+	card_start
 	url
 	
-	Virement
+	virement
 PK	id_virement
 	date
 	montant
 	iban_from
 	iban_to
-	id_banque
+	id_banque (FK)
 	
-	Retrait
+	retrait
 PK	id_retrait
 	date
 	montant
 	iban_from
-	id_banque
+	id_banque (FK)
