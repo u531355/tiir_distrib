@@ -49,18 +49,7 @@ public class DepotController {
 		if (client == null)
 			return "redirect:/";
 		List<Distributeur> listDistrib = distributeurDao.getAll();
-		// TODO : Distrib d = distribDao.getFirst() => On en stock qu'un anyway
-		// d.montant = d.montant+depot.montant
-		// distribdao.update(d)
-		// ++ Dans tous les controller on set une erreur mais je pense qu'on
-		// l'affiche pas sur toutes les pages, check dans
-		// Depot controller + depot.html, j'ia bien geré les erreues ( enfin
-		// vite fait)
-		// + Pour logout => check comment le sendRequest prend un string,
-		// regarde bien ce que j'ai fait dans les autres controller pour
-		// que le json.toString() corresponde à ce que la banque attend,
-		// j'enlève les [ ], faut surotut pas oublié de le faire,
-		// Notre lib les rajoute je sais pas pourquoi .
+
 		try {
 			interactionBanque.depot(client, amount);
 			Distributeur d = listDistrib.get(0);
