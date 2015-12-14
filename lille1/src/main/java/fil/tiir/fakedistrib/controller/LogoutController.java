@@ -30,7 +30,6 @@ public class LogoutController {
 
 		} catch (InteractionBanqueException e) {
 			model.addAttribute("error", e.getMessage());
-			return "error";
 		}
 
 		return "redirect:/";

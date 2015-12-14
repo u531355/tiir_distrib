@@ -20,9 +20,12 @@ public class BalanceController {
 
 	@Autowired
 	private InteractionBanque interactionBanque;
+
 	/**
-	 * Controller of the balance functionnality, ask the Bank service for the solde functionnality and display it 
-	 * in the balance webpage. if a InteractionBanqueException has been generated, returns a error webpage
+	 * Controller of the balance functionnality, ask the Bank service for the
+	 * solde functionnality and display it in the balance webpage. if a
+	 * InteractionBanqueException has been generated, returns a error webpage
+	 * 
 	 * @param model
 	 * @param session
 	 * @return
@@ -36,7 +39,7 @@ public class BalanceController {
 			model.addAttribute("accountbalance", interactionBanque.afficherSolde(client));
 		} catch (InteractionBanqueException e) {
 			model.addAttribute("error", e.getMessage());
-			return "error";
+			return "balance";
 		}
 		return "balance";
 	}
