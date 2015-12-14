@@ -30,8 +30,8 @@ public class Application extends WebMvcConfigurerAdapter {
 	public DataSource dataSource() {
 		BasicDataSource ds = new BasicDataSource();
 		ds.setUsername("postgres");
-		ds.setPassword("postgres");
-		ds.setUrl("jdbc:postgresql://127.0.0.1:5432/distrib");
+		ds.setPassword("42");
+		ds.setUrl("jdbc:postgresql://pcmt10:5432/distrib");
 		ds.setDriverClassName("org.postgresql.Driver");
 		ds.setMaxWait(25);
 		return ds;

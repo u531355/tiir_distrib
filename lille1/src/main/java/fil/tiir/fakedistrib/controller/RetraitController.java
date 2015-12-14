@@ -32,15 +32,17 @@ public class RetraitController {
 		Client client = (Client) session.getAttribute("client");
 		if (client == null)
 			return "redirect:/";
-		model.addAttribute("retrait", new Retrait(client));
+		model.addAttribute("retrait", new Retrait());
 		return "retrait";
 	}
 
 	@RequestMapping(value = "/retrait", method = RequestMethod.POST)
 	public String retrait(@ModelAttribute("retrait") Retrait retrait, Model model, HttpSession session) {
 		Client client = (Client) session.getAttribute("client");
+
 		if (client == null)
 			return "redirect:/";
+		retrait.update(client);
 		try {
 			interactionDistributeur.isEnoughCash(retrait.getMontant());
 			interactionBanque.retrait(client, retrait);

@@ -18,10 +18,14 @@ public class Retrait {
 
 	private int montant;
 
-	public Retrait(Client client) {
+	public void update(Client client) {
 		this.date = new Date();
 		this.banque = client.getBank();
 		this.ibanFrom = client.getNumeroCarte();
+	}
+
+	public Retrait() {
+
 	}
 
 	public Integer getIdRetrait() {

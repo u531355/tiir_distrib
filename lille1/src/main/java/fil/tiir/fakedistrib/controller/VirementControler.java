@@ -1,5 +1,7 @@
 package fil.tiir.fakedistrib.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class VirementControler {
 		Client client = (Client) session.getAttribute("client");
 		if (client == null)
 			return "redirect:/";
-		model.addAttribute("virement", new Virement(client));
+		model.addAttribute("virement", new Virement());
 		return "virement";
 	}
 
@@ -39,8 +41,9 @@ public class VirementControler {
 
 		if (client == null)
 			return "redirect:/";
-
+		virement.update(client);
 		try {
+			virement.setDate(new Date());
 			interactionBanque.virement(client, virement);
 		} catch (InteractionBanqueException e) {
 			model.addAttribute("error", e.getMessage());

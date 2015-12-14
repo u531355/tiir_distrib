@@ -20,10 +20,14 @@ public class Virement {
 
 	private int montant;
 
-	public Virement(Client client) {
+	public void update(Client client) {
 		this.banque = client.getBank();
 		this.ibanFrom = client.getIdAccount();
 		this.date = new Date();
+	}
+
+	public Virement() {
+
 	}
 
 	public Integer getIdVirement() {

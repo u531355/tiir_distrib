@@ -159,9 +159,11 @@ public class InteractionBanqueImpl implements InteractionBanque {
 			jsonToString = jsonToString.replace("]", "");
 			RequestUtil.sendRequest(jsonToString, client.getBank(), url, client.getToken());
 		} catch (IOException e) {
+			e.printStackTrace();
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 
 		} catch (JSONException e) {
+			e.printStackTrace();
 			throw new InteractionBanqueException("Erreur de communication avec la banque.");
 
 		}
