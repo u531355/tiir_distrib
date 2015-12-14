@@ -26,6 +26,10 @@ public class Distributeur {
 		return this.montant;
 	}
 
+	public void setMontant(int montant) {
+		this.montant = this.montant + montant;
+	}
+
 	public void diminuerMontant(int montant) {
 		this.montant -= montant;
 	}
