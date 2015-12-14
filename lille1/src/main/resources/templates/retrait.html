@@ -14,7 +14,7 @@
     </head>
     <body>
     	<h1>Money withdrawal :</h1>
-     	<p> </p>
+     		<p th:if="${error}" th:text="${error}" />
         <form th:action="@{/retrait}" method="post">
            <!-- <p><label>Enter the account to withdraw money from :</label><input type="text" name="accountfrom"/></p> --> 
             <p><label>Enter the amount to withdraw</label><input type="number" name="montant"/></p>

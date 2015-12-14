@@ -1,6 +1,7 @@
 package fil.tiir.fakedistrib.serviceimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fil.tiir.fakedistrib.dao.DistributeurDao;
 import fil.tiir.fakedistrib.entity.Distributeur;
@@ -10,6 +11,7 @@ import fil.tiir.fakedistrib.service.InteractionDistributeur;
  * @author blanquart
  *
  */
+@Service
 public class InteractionDistributeurImpl implements InteractionDistributeur {
 	@Autowired
 	private DistributeurDao d;

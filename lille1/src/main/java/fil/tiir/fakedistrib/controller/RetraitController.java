@@ -14,17 +14,20 @@ import fil.tiir.fakedistrib.entity.Client;
 import fil.tiir.fakedistrib.entity.Retrait;
 import fil.tiir.fakedistrib.exception.InteractionBanqueException;
 import fil.tiir.fakedistrib.service.InteractionBanque;
+import fil.tiir.fakedistrib.service.InteractionDistributeur;
 
 /**
  * Controller for the money withdrawal function of the ATM
  */
 @Controller
-public class RetraitControler {
+public class RetraitController {
 
 	@Autowired
 	private RetraitDao retraitDao;
 	@Autowired
 	private InteractionBanque interactionBanque;
+	@Autowired
+	private InteractionDistributeur interactionDistributeur;
 	//TODO commentaire
 	@RequestMapping(value = "/retrait", method = RequestMethod.GET)
 	public String retrait(Model model, HttpSession session) {
@@ -42,14 +45,15 @@ public class RetraitControler {
 			return "redirect:/";
 		retrait.update(client);
 		try {
-			if(interactionBanque.retrait(client, retrait)){
+			if(interactionDistributeur.isEnoughCash(retrait.getMontant())  && interactionBanque.retrait(client, retrait)){
+				interactionDistributeur.retireCash(retrait.getMontant());
 				retraitDao.insert(retrait);
 				return "choices";
 			}
 		} catch (InteractionBanqueException e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		
-		return "failure";
+		model.addAttribute("error", "Pas assez de fond ou retrait non autorisé");
+		return "retrait";
 	}
 }
