@@ -21,8 +21,14 @@
      	-->
         <form th:action="@{/depot}"  method="post">
             <!-- <p><label>Enter the account to deposit money to :</label><input type="text" th:field="*{ibanTo}"/></p> -->
-            <p><label>Amount to transfer :</label><input type="number" name="montant"/></p>
-            <p><input type="submit" value="Deposit money"/></p>
+            <!-- <p><label>Amount to transfer :</label><input type="number" /></p> -->
+            
+            <div class="input-group">
+		      <div class="input-group-addon">€</div>
+		      <input type="number" class="form-control" id="InputAmount" placeholder="Amount to deposit" name="montant"/>
+		    </div>
+		    <br/>
+            <p><input type="submit" class="btn btn-primary" value="Deposit money"/></p>
         </form>
     </body>
 </html>

@@ -17,10 +17,14 @@
      	<p> </p>
         <form th:action="@{/virement}" method="post">
            
-            <p><label>Enter the account to transfer money to :</label><input type="text" name="ibanTo"/></p>
-            <p><label>Amount to tranfer :</label><input type="number" name="montant"/></p>
-            <p><input type="submit" value="Transfer money"/></p>
-            
+            <p><label>Enter the account to transfer money to :</label><input type="text" class="form-control" name="ibanTo"/></p>
+            <label class="sr-only" for="exampleInputAmount">Amount to tranfer :</label>
+		    <div class="input-group">
+		      <div class="input-group-addon">€</div>
+		      <input type="number" class="form-control" id="exampleInputAmount" placeholder="Amount to transfer" name="montant"/>
+		    </div>
+		    <br/>
+            <p><input type="submit" class="btn btn-primary" value="Transfer money"/></p>
 
         </form>
     </body>

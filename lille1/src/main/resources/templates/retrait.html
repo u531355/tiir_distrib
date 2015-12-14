@@ -17,8 +17,15 @@
      		<p th:if="${error}" th:text="${error}" />
         <form th:action="@{/retrait}" method="post">
            <!-- <p><label>Enter the account to withdraw money from :</label><input type="text" name="accountfrom"/></p> --> 
-            <p><label>Enter the amount to withdraw</label><input type="number" name="montant"/></p>
-            <p><input type="submit" value="Withdraw money"/></p>
+            <!-- <p><label>Enter the amount to withdraw</label><input type="number" name="montant"/></p> --> 
+            
+            <div class="input-group">
+		      <div class="input-group-addon">€</div>
+		      <input type="number" class="form-control" id="InputAmount" placeholder="Amount to withdraw" name="montant"/>
+		    </div>
+		    <br/>
+            
+            <p><input type="submit" class="btn btn-primary" value="Withdraw money"/></p>
         </form>
     </body>
 </html>

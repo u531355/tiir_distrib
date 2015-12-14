@@ -14,13 +14,12 @@
 	</head>
 	<body>
 		
-		<!-- mARCHE PAS JE SAIS PAS PK : <p th:text="${session.client.idAccount}" /> Faudrait afficher le compte -->
 	    <h1>Your account number is  : <span th:text="${session.client.idAccount}"></span> </h1>	   
 		
-		<p><a th:href="@{/balance}">Check my balance</a></p>
-		<p><a th:href="@{/retrait}">Withdraw money</a></p>
-		<p><a th:href="@{/virement}">Transfer money</a></p>
-		<p><a th:href="@{/depot}">Money Deposit</a></p>
+		<p><a th:href="@{/balance}" class="btn btn-block btn-lg btn-info">Check my balance</a></p>
+		<p><a th:href="@{/retrait}" class="btn btn-block btn-lg btn-info">Withdraw money</a></p>
+		<p><a th:href="@{/virement}" class="btn btn-block btn-lg btn-info">Transfer money</a></p>
+		<p><a th:href="@{/depot}" class="btn btn-block btn-lg btn-info">Money Deposit</a></p>
 		
 		<form th:action="@{/logout}" method="post" class="form-group">
 			<input type="submit" value="Sign Out"/>
